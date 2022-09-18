@@ -1,0 +1,9 @@
+password : 90033807
+alias : coursestore
+validity years : 50
+First&lastname : Course Store
+Originzation unit : LMS
+Originzation : CourseStore
+City : Kuwait
+State : KuwaitCap
+countrycode : KW
