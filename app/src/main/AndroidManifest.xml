@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.online.course">
+    package="com.online.coursestore">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".manager.App"
+        android:name="com.online.coursestore.manager.App"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:hardwareAccelerated="true"
@@ -23,11 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Course">
         <activity
-            android:name=".ui.WebViewActivity"
+            android:name="com.online.coursestore.ui.WebViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false" />
         <activity
-            android:name=".ui.SplashScreenActivity"
+            android:name="com.online.coursestore.ui.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.PaymentStatusActivity"
+            android:name="com.online.coursestore.ui.PaymentStatusActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -52,24 +52,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.VideoPlayerActivity"
+            android:name="com.online.coursestore.ui.VideoPlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_video_player"
             android:theme="@style/Theme.Course.Fullscreen"
             android:exported="false"
             />
         <activity
-            android:name=".ui.OnboardingActivity"
+            android:name="com.online.coursestore.ui.OnboardingActivity"
             android:screenOrientation="portrait"
             android:exported="false"
             />
         <activity
-            android:name=".ui.SignInActivity"
+            android:name="com.online.coursestore.ui.SignInActivity"
             android:screenOrientation="portrait"
             android:exported="false"
             />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.online.coursestore.ui.MainActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:exported="true"

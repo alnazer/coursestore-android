@@ -26,7 +26,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
-            <com.online.course.ui.widget.RoundishImageView
+            <com.online.coursestore.ui.widget.RoundishImageView
                 android:id="@+id/itemTicketImg"
                 android:layout_width="70dp"
                 android:layout_height="70dp"

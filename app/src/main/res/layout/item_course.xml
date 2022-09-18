@@ -12,7 +12,7 @@
     android:focusable="true"
     android:foreground="@drawable/ripple_effect">
 
-    <com.online.course.ui.widget.RoundishImageView
+    <com.online.coursestore.ui.widget.RoundishImageView
         android:id="@+id/itemCourseImg"
         android:layout_width="0dp"
         android:layout_height="100dp"

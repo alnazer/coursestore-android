@@ -8,7 +8,7 @@ android {
     buildToolsVersion '30.0.3'
 
     defaultConfig {
-        applicationId "com.online.course"
+        applicationId "com.online.coursestore"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 2

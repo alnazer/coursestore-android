@@ -25,7 +25,7 @@
             android:padding="5dp"
             android:visibility="visible">
 
-            <com.online.course.ui.widget.RoundishImageView
+            <com.online.coursestore.ui.widget.RoundishImageView
                 android:id="@+id/itemClassCommentImg"
                 android:layout_width="70dp"
                 android:layout_height="70dp"

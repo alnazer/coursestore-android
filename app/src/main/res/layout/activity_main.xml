@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.online.course.ui.widget.CustomDuoDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.online.coursestore.ui.widget.CustomDuoDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
@@ -366,4 +366,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</com.online.course.ui.widget.CustomDuoDrawerLayout>
+</com.online.coursestore.ui.widget.CustomDuoDrawerLayout>

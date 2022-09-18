@@ -213,7 +213,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <com.online.course.ui.widget.CustomScrollView
+    <com.online.coursestore.ui.widget.CustomScrollView
         android:id="@+id/homeScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -756,7 +756,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.online.course.ui.widget.CustomScrollView>
+    </com.online.coursestore.ui.widget.CustomScrollView>
 
 </LinearLayout>
 

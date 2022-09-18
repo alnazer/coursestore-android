@@ -10,7 +10,7 @@
     android:layout_marginStart="@dimen/margin_16"
     android:foreground="@drawable/ripple_effect_corner_20">
 
-    <com.online.course.ui.widget.RoundishImageView
+    <com.online.coursestore.ui.widget.RoundishImageView
         android:id="@+id/itemFeaturedImg"
         android:layout_width="0dp"
         android:layout_height="200dp"
@@ -21,7 +21,7 @@
         app:cornerRadius="20dp"
         app:roundedCorners="all" />
 
-    <com.online.course.ui.widget.RoundishImageView
+    <com.online.coursestore.ui.widget.RoundishImageView
         android:id="@+id/itemFeaturedImgOverlay"
         android:layout_width="0dp"
         android:layout_height="0dp"

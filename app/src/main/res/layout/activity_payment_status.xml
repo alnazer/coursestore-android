@@ -27,14 +27,15 @@
             android:background="@drawable/circle_white">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/paymentStatusImg"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
-                android:id="@+id/paymentStatusImg"
                 android:layout_gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/orderDetailsDateTimeTv"
-                app:srcCompat="@drawable/ic_bill_successful" />
+                app:srcCompat="@drawable/ic_bill_successful"
+                tools:ignore="ImageContrastCheck" />
 
         </FrameLayout>
 
@@ -47,13 +48,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="10dp"
         android:gravity="center"
         android:maxWidth="250dp"
         android:text="@string/successful_payment"
-        android:textColor="@color/white"
+        android:textColor="#D81B60"
         android:textSize="@dimen/textsize_20d"
         app:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,7 +69,7 @@
         android:gravity="center"
         android:maxWidth="250dp"
         android:text="@string/successful_payment_desc"
-        android:textColor="@color/white"
+        android:textColor="#6D4C41"
         android:textSize="@dimen/textsize_14d"
         app:fontFamily="@font/regular"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +85,7 @@
         android:fontFamily="@font/regular"
         android:text="@string/my_classes_small"
         android:textAllCaps="false"
-        android:textColor="@color/accent"
+        android:textColor="#2E7D32"
         android:textSize="@dimen/textsize_15d"
         app:backgroundTint="@color/white"
         app:cornerRadius="@dimen/btn_corner_radius"

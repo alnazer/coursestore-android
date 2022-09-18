@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">CourseStore</string>
     <string name="brand">CourseStore</string>
-    <string name="google_server_client_id">291393125668-adhjrrv3j4ajcl1rp6t5sf03n993uj9k.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">282886746252426</string>
-    <string name="fb_login_protocol_scheme">fb282886746252426</string>
+    <string name="google_server_client_id">157908304907-osicph28moccvji0n63hji8p1q2nrkm4.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">675016747030347</string>
+    <string name="fb_login_protocol_scheme">fb675016747030347</string>
     <string name="onboarding_slide1_title">Start learning now!</string>
     <string name="onboarding_slide1_desc">Interested in to learn from the best teachers around the world?</string>
     <string name="onboarding_slide2_title">Book a meeting…</string>

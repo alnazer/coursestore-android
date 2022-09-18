@@ -362,7 +362,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/course_details_player_view" />
 
-                        <com.online.course.ui.widget.RoundishImageView
+                        <com.online.coursestore.ui.widget.RoundishImageView
                             android:id="@+id/course_details_img"
                             android:layout_width="match_parent"
                             android:layout_height="270dp"
