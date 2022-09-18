@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
     <color name="white_opacity_30">#40FFFFFF</color>
-    <color name="accent">#43D477</color>
-    <color name="dark_green">#00BA63</color>
+    <color name="accent">#410099</color>
+    <color name="dark_green">#2C0463</color>
     <color name="rippleColor">@color/lightGray</color>
     <color name="lightGray">#F8F8F8</color>
     <color name="text_color">#2f3133</color>
@@ -40,7 +40,7 @@
     <color name="default_status_bar_color">@color/gray</color>
     <color name="primary_status_bar_color">@color/accent</color>
 
-    <color name="bottom_nav_start_color">#218F48</color>
-    <color name="bottom_nav_end_color">#43D477</color>
-    <color name="toolbar_drawer_open_color">#24EF9C</color>
+    <color name="bottom_nav_start_color">#410099</color>
+    <color name="bottom_nav_end_color">#25cad2</color>
+    <color name="toolbar_drawer_open_color">#30DEE6</color>
 </resources>

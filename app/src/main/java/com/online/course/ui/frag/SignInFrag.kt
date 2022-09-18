@@ -32,6 +32,7 @@ import com.online.course.ui.MainActivity
 import com.online.course.ui.frag.abstract.UserAuthFrag
 import com.online.course.ui.widget.LoadingDialog
 import org.json.JSONException
+import kotlin.math.log
 
 
 class SignInFrag : UserAuthFrag() {
@@ -99,7 +100,8 @@ class SignInFrag : UserAuthFrag() {
                 val loginObj = Login()
                 loginObj.username = username
                 loginObj.password = password
-
+                println("username$username")
+                println("password$password");
                 mPresenter.login(loginObj)
             }
 

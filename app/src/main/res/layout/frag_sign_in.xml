@@ -98,7 +98,7 @@
             android:fontFamily="@font/regular"
             android:hint="@string/email_or_phone"
             android:inputType="text"
-            android:text="Please activate your license"
+            android:text="Username"
             android:maxLength="255"
             android:maxLines="1"
             android:paddingStart="@dimen/padding_16"
@@ -143,7 +143,7 @@
             android:enabled="false"
             android:fontFamily="@font/regular"
             android:minWidth="170dp"
-            android:text="@string/active_license"
+            android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_15d"
@@ -173,22 +173,6 @@
             app:layout_constraintVertical_bias="0.5" />
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/signInTermsAndServicesTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_16"
-            android:fontFamily="@font/regular"
-            android:gravity="center"
-            android:maxWidth="200dp"
-            android:text="@string/active_license_desc"
-            android:textColor="@color/text_color3"
-            android:textSize="@dimen/textsize_14d"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signInLoginErrorTv"
-            app:layout_constraintVertical_bias="0.5" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/signInHaveNoAccountTv"
@@ -205,7 +189,7 @@
             app:layout_constraintEnd_toStartOf="@id/signInSignUpBtn"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signInTermsAndServicesTv"
+            app:layout_constraintTop_toBottomOf="@+id/signInLoginErrorTv"
             app:layout_constraintVertical_bias="0.5" />
 
 

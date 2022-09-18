@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Rocket LMS</string>
-    <string name="brand">Rocket LMS</string>
+    <string name="app_name">CourseStore</string>
+    <string name="brand">CourseStore</string>
     <string name="google_server_client_id">291393125668-adhjrrv3j4ajcl1rp6t5sf03n993uj9k.apps.googleusercontent.com</string>
     <string name="facebook_app_id">282886746252426</string>
     <string name="fb_login_protocol_scheme">fb282886746252426</string>
