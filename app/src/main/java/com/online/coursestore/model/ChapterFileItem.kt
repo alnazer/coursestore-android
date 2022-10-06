@@ -13,6 +13,7 @@ class ChapterFileItem() : Parcelable, CourseCommonItem {
         UPLOAD("upload"),
         YOUTUBE("youtube"),
         VIMEO("vimeo"),
+        VDOCIOHER("video-cipher"),
         EXTERNAL_LINK("external_link"),
         S3("s3"),
     }

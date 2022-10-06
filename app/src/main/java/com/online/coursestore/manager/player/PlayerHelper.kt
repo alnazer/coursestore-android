@@ -8,7 +8,7 @@ object PlayerHelper {
     var playerState: PlayerState? = null
 
     enum class Type : Serializable {
-        LOCAL, YOUTUBE, VIMEO
+        LOCAL, YOUTUBE, VIMEO, VDOCIOHER
     }
 
     interface Listener {

@@ -47,5 +47,4 @@ object BuildVars {
                 put("HEBREW", R.drawable.flag_israel)
             }
         }
-
 }

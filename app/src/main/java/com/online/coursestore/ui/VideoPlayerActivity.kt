@@ -124,6 +124,8 @@ class VideoPlayerActivity : AppCompatActivity() {
 
             youTubePlayerView.initialize(listener)
             youTubePlayerView.visibility = View.VISIBLE
+        }else if (playerState.playerType == PlayerHelper.Type.VDOCIOHER) {
+
         } else {
             mVideoHelper = VimeoVideoPlayerHelper(mBinding.vimeoPlayerView)
             mVideoHelper.initPlayerFromState(playerState)

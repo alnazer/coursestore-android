@@ -98,7 +98,7 @@
             android:fontFamily="@font/regular"
             android:hint="@string/email_or_phone"
             android:inputType="text"
-            android:text="Username"
+            android:text=""
             android:maxLength="255"
             android:maxLines="1"
             android:paddingStart="@dimen/padding_16"
