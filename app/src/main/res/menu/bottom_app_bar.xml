@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home_page"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/my_classes_page"
+        android:icon="@drawable/ic_classes_bottom_bar"
+        android:title="@string/my_classes" />
+
+    <item
+        android:id="@+id/providers_page"
+        android:icon="@drawable/ic_providers"
+        android:title="@string/providers" />
+
+    <item
+        android:id="@+id/categories_page"
+        android:icon="@drawable/ic_categories"
+        android:title="@string/categories" />
+
+<!--    <item-->
+<!--        android:enabled="false"-->
+<!--        android:title="" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/blog_page"-->
+<!--        android:icon="@drawable/ic_blog"-->
+<!--        android:title="@string/blog" />-->
+
+
+
+</menu>
