@@ -3,6 +3,7 @@ package com.online.coursestore.ui.frag.abstract
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import com.facebook.CallbackManager
@@ -147,11 +148,11 @@ abstract class UserAuthFrag : NetworkObserverFragment(), View.OnClickListener {
 
             thirdPartyLogin.userId = res.data!!.userId
 
+
             if (res.data!!.isAlreadyRegistered) {
                 val token = res.data!!.token
                 App.saveToLocal(token, requireContext(), AppDb.DataType.TOKEN)
                 ApiService.createAuthorizedApiService(requireContext(), token)
-
                 val commonPresenter = CommonApiPresenterImpl.getInstance()
                 commonPresenter.getUserInfo(res.data!!.userId, object : ItemCallback<UserProfile> {
                     override fun onItem(item: UserProfile, vararg args: Any) {

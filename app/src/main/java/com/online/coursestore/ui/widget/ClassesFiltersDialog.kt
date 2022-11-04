@@ -25,6 +25,7 @@ import com.online.coursestore.manager.net.observer.NetworkObserverBottomSheetDia
 import com.online.coursestore.model.CourseFilter
 import com.online.coursestore.model.CourseFilterOption
 import com.online.coursestore.model.KeyValuePair
+import com.online.coursestore.ui.frag.CategoryFrag
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
@@ -178,6 +179,9 @@ class ClassesFiltersDialog : NetworkObserverBottomSheetDialog(), View.OnClickLis
             }
 
             else -> {
+                if (parentFragment is CategoryFrag){
+                    (parentFragment as CategoryFrag).showProgress()
+                }
                 val keyValPairs = ArrayList<KeyValuePair>()
 
                 if (this::mFilterOptions.isInitialized) {

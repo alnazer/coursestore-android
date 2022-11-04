@@ -302,24 +302,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/course_chapter_item_third_mark_img"
                 tools:ignore="SpUsage" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/course_chapter_item_read_switch"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_16"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:fontFamily="@font/regular"
-                android:text="@string/read_this_lesson"
-                android:textColor="@color/text_color5"
-                android:textSize="@dimen/textsize_14d"
-                android:thumb="@drawable/switch_custom_thumb"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_chapter_item_desc_tv"
-                app:track="@drawable/switch_custom_track"
-                app:useMaterialThemeColors="false" />
+<!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
+<!--                android:id="@+id/course_chapter_item_read_switch"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_16"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:text="@string/read_this_lesson"-->
+<!--                android:textColor="@color/text_color5"-->
+<!--                android:textSize="@dimen/textsize_14d"-->
+<!--                android:thumb="@drawable/switch_custom_thumb"-->
+<!--                android:visibility="gone"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/course_chapter_item_desc_tv"-->
+<!--                app:track="@drawable/switch_custom_track"-->
+<!--                app:useMaterialThemeColors="false" />-->
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -337,7 +337,7 @@
                 android:textSize="@dimen/textsize_15d"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_chapter_item_read_switch"
+                app:layout_constraintTop_toBottomOf="@+id/course_chapter_item_desc_tv"
                 tools:ignore="SpUsage" />
 
             <androidx.recyclerview.widget.RecyclerView

@@ -47,7 +47,7 @@ class CourseChapterItemPresenterImpl(private val frag: CourseChapterItemFrag) :
     ) {
         val fileId = fileItem.id
 
-        val baseUrlAndHost = Utils.getBaseUrlAndHostFromUrl(fileItem.file) ?: return
+        val baseUrlAndHost = Utils.getBaseUrlAndHostFromUrl(fileItem.download_link) ?: return
 
         val downloadRequest =
             ApiService.getDownloadApiClient(baseUrlAndHost[0], progressListener, fileId)

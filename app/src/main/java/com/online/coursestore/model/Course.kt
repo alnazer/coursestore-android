@@ -49,11 +49,11 @@ class Course() : ItemPicker, Parcelable {
     @SerializedName("image")
     var img: String? = null
 
-//    @SerializedName("video_demo")
-//    var video: VideoCipherData? = null
-
     @SerializedName("video_demo")
-    var video: String? = null
+    var video: VideoCipherData? = null
+
+//    @SerializedName("video_demo")
+//    var video: String? = null
 
     @SerializedName("capacity")
     var capacity = 0
@@ -183,8 +183,8 @@ class Course() : ItemPicker, Parcelable {
         startDate = parcel.readLong()
         duration = parcel.readInt()
         img = parcel.readString()
-//        video = parcel.readParcelable(VideoCipherData::class.java.classLoader)
-        video = parcel.readString()
+        video = parcel.readParcelable(VideoCipherData::class.java.classLoader)
+//        video = parcel.readString()
         capacity = parcel.readInt()
         price = parcel.readDouble()
         rating = parcel.readFloat()
@@ -233,8 +233,8 @@ class Course() : ItemPicker, Parcelable {
         parcel.writeParcelable(sales, flags)
         parcel.writeInt(duration)
         parcel.writeString(img)
-//        parcel.writeParcelable(video, flags)
-        parcel.writeString(video)
+        parcel.writeParcelable(video, flags)
+//        parcel.writeString(video)
         parcel.writeInt(capacity)
         parcel.writeDouble(price)
         parcel.writeFloat(rating)

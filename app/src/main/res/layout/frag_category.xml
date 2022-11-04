@@ -107,72 +107,72 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/categoryFeaturedTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_16"
-                android:fontFamily="@font/bold"
-                android:text="@string/featured_classes"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textsize_20d"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/categoryFeaturedTv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_16"-->
+<!--                android:fontFamily="@font/bold"-->
+<!--                android:text="@string/featured_classes"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                android:textSize="@dimen/textsize_20d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/categoryFeaturedViewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:layout_marginEnd="@dimen/margin_16"
-                    android:minHeight="200dp"
-                    android:padding="@dimen/zero"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/categoryFeaturedTv" />
-
-                <ProgressBar
-                    android:id="@+id/categoryFeaturedViewPagerProgressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_16"
-                    android:layout_marginEnd="@dimen/margin_16"
-                    android:layout_marginBottom="@dimen/margin_16"
-                    android:layout_gravity="center"
-                    app:layout_constraintBottom_toBottomOf="@+id/categoryFeaturedViewPager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/categoryFeaturedViewPager" />
+<!--            <FrameLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
 
-            </FrameLayout>
+<!--                <androidx.viewpager2.widget.ViewPager2-->
+<!--                    android:id="@+id/categoryFeaturedViewPager"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/margin_16"-->
+<!--                    android:layout_marginTop="@dimen/margin_10"-->
+<!--                    android:layout_marginEnd="@dimen/margin_16"-->
+<!--                    android:minHeight="200dp"-->
+<!--                    android:padding="@dimen/zero"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/categoryFeaturedTv" />-->
+
+<!--                <ProgressBar-->
+<!--                    android:id="@+id/categoryFeaturedViewPagerProgressBar"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/margin_16"-->
+<!--                    android:layout_marginTop="@dimen/margin_16"-->
+<!--                    android:layout_marginEnd="@dimen/margin_16"-->
+<!--                    android:layout_marginBottom="@dimen/margin_16"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/categoryFeaturedViewPager"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/categoryFeaturedViewPager" />-->
 
 
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/categoryFeaturedIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_8"
-                android:padding="@dimen/zero"
-                app:dotsColor="@color/gray81"
-                app:dotsSize="10dp"
-                app:dotsSpacing="5dp"
-                app:dotsWidthFactor="2.5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/categoryFeaturedViewPager"
-                app:layout_constraintVertical_bias="0.5"
-                app:progressMode="false"
-                app:selectedDotColor="@color/accent" />
+<!--            </FrameLayout>-->
+
+
+<!--            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator-->
+<!--                android:id="@+id/categoryFeaturedIndicator"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="@dimen/margin_8"-->
+<!--                android:padding="@dimen/zero"-->
+<!--                app:dotsColor="@color/gray81"-->
+<!--                app:dotsSize="10dp"-->
+<!--                app:dotsSpacing="5dp"-->
+<!--                app:dotsWidthFactor="2.5"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/categoryFeaturedViewPager"-->
+<!--                app:layout_constraintVertical_bias="0.5"-->
+<!--                app:progressMode="false"-->
+<!--                app:selectedDotColor="@color/accent" />-->
 
 
             <FrameLayout

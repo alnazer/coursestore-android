@@ -15,6 +15,7 @@ import com.online.coursestore.manager.Utils.toInt
 import com.online.coursestore.manager.listener.ItemCallback
 import com.online.coursestore.manager.net.observer.NetworkObserverBottomSheetDialog
 import com.online.coursestore.model.KeyValuePair
+import com.online.coursestore.ui.frag.CategoryFrag
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -161,6 +162,9 @@ class ClassesOptionsDialog : NetworkObserverBottomSheetDialog(), View.OnClickLis
             }
 
             R.id.courseOptionsApplyBtn -> {
+                if (parentFragment is CategoryFrag){
+                    (parentFragment as CategoryFrag).showProgress()
+                }
                 val queryParams = ArrayList<KeyValuePair>()
 
                 if (mBinding.courseOptionsLiveClassChbx.isChecked) {

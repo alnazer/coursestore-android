@@ -375,16 +375,16 @@
                             app:roundedCorners="all" />
 
                         <fragment
-                            android:name="com.vdocipher.aegis.player.VdoPlayerSupportFragment"
+                            android:name="com.vdocipher.aegis.ui.view.VdoPlayerUIFragment"
                             android:id="@+id/vdoCipherfragment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:keepScreenOn="true"/>
-
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/course_details_instructor_container"
@@ -456,6 +456,27 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/course_details_player_controller_view"
                             app:srcCompat="@drawable/ic_more" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/promo_video_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginEnd="@dimen/margin_8"
+                            android:layout_marginTop="@dimen/margin_8"
+                            android:layout_marginBottom="@dimen/margin_8"
+                            android:fontFamily="@font/regular"
+                            android:text="@string/promo_video"
+                            android:visibility="gone"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize_13d"
+                            app:backgroundTint="@color/accent"
+                            app:cornerRadius="@dimen/card_corner_radius"
+                            app:layout_constraintBottom_toBottomOf="@id/course_details_more_btn"
+                            app:layout_constraintEnd_toStartOf="@+id/course_details_more_btn"
+                            app:layout_constraintTop_toTopOf="@id/course_details_more_btn"
+                            app:rippleColor="@color/rippleColor"
+                            tools:ignore="SpUsage" />
 
                         <include
                             android:id="@+id/course_details_instructor_not_available_container"

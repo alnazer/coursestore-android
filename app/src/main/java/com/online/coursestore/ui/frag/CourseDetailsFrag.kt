@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import android.webkit.URLUtil
 import androidx.annotation.WorkerThread
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -48,13 +47,8 @@ import com.vdocipher.aegis.player.VdoPlayer
 import com.vdocipher.aegis.player.VdoPlayerSupportFragment
 import com.vdocipher.aegis.ui.view.VdoPlayerUIFragment
 import org.json.JSONException
-import org.json.JSONObject
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
 import java.lang.IllegalStateException
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
@@ -74,8 +68,8 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
     private var mActivityFullScreenStarted = false
     private var mShowHours = false
     private var mShowDays = false
-    private lateinit var playerFragment: VdoPlayerSupportFragment
-    private lateinit var vdoParams: VdoInitParams
+    private lateinit var playerFragment: VdoPlayerUIFragment
+    private lateinit var videoCipherPlayer :VdoPlayer
 
     private val mOnCommentAdded = object : ItemCallback<Comment> {
         override fun onItem(item: Comment, vararg args: Any) {
@@ -108,6 +102,7 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
 
     private val mAddToCartCallback = object : ItemCallback<BaseResponse> {
         override fun onItem(res: BaseResponse, vararg args: Any) {
+            Log.d("videoCipherData", "onitem")
             if (context == null) return
 
             if (res.isSuccessful) {
@@ -203,11 +198,7 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         initBottomSheet()
 
         mCourse = requireArguments().getParcelable(App.COURSE)!!
-        if (mCourse.video != null){
-            //Log.d("videoCipherData", mCourse.video!!.otp + " " + mCourse.video!!.playbackInfo)
-        }
-
-
+        mBinding.promoVideoButton.setOnClickListener(this)
         mLoadingDialog = LoadingDialog.instance
         mLoadingDialog.show(childFragmentManager, null)
 
@@ -225,7 +216,7 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         mCommonPresenter = CommonApiPresenterImpl.getInstance()
         mCommonPresenter.getCourseDetails(mCourse.id, this)
 
-        playerFragment = childFragmentManager.findFragmentById(R.id.vdoCipherfragment) as VdoPlayerSupportFragment
+        playerFragment = childFragmentManager.findFragmentById(R.id.vdoCipherfragment) as VdoPlayerUIFragment
         playerFragment.initialize(this)
     }
 
@@ -236,15 +227,11 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         mBottomSheetBehavoir.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
-
-
-    @WorkerThread
-    @Throws(IOException::class, JSONException::class)
-    private fun obtainNewVdoParams(): VdoInitParams? {
+    fun obtainNewVdoParams(otp :String, playbackinfo :String): VdoInitParams {
         val vdoParams = VdoInitParams.Builder()
-            .setOtp("20160313versASE323SGDA13Ku3TmgU6QgU49Oa09xYrym7pquasz9TBZ0Gf5tE8")
-            .setPlaybackInfo("eyJ2aWRlb0lkIjoiYjkxNTJiNDU2NzhhNDQyODkyNzkxZDNkNjMyZjg3YWQifQ==")
-            .setPreferredCaptionsLanguage("en")
+            .setOtp(otp)
+            .setPlaybackInfo(playbackinfo)
+            .setPreferredCaptionsLanguage("ar")
             .build()
         Log.i(TAG, "obtained new otp and playbackInfo")
         return vdoParams
@@ -253,70 +240,71 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
 
     override fun onInitializationSuccess(p0: PlayerHost?, p1: VdoPlayer?, p2: Boolean) {
         Log.d("VideoCipherInit", "Success")
-        p1!!.addPlaybackEventListener(playbackListener)
-        p1.load(obtainNewVdoParams())
+        videoCipherPlayer = p1!!
+        if (mCourse.video != null){
+            mBinding.courseDetailsImg.visibility = View.GONE
+            adjustLayoutToImg(R.id.vdoCipherfragment)
+            playerFragment.view!!.visibility = View.VISIBLE
+        }
+    }
+
+    fun loadVideoCipherVideo(params : VdoInitParams){
+        videoCipherPlayer.addPlaybackEventListener(videoCipherPlaybackListener)
+        videoCipherPlayer.load(params)
     }
 
     override fun onInitializationFailure(p0: PlayerHost?, p1: ErrorDescription?) {
         Log.d("VideoCipherInit", "Failed " + p1!!.errorMsg)
+        mBinding.courseDetailsImg.visibility = View.VISIBLE
+        adjustLayoutToImg(R.id.course_details_img)
+        playerFragment.view!!.visibility = View.GONE
     }
 
-    private val playbackListener = object : VdoPlayer.PlaybackEventListener {
+    private val videoCipherPlaybackListener = object : VdoPlayer.PlaybackEventListener {
         override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-//            Log.d(playbackStateString(playWhenReady, playbackState))
+            Log.d("VideoCipherPlaybackListener", "onPlayerStateChanged")
         }
 
         override fun onTracksChanged(tracks: Array<Track>, tracks1: Array<Track>) {
-            Log.i(TAG, "onTracksChanged")
-            Log.d("onTracksChanged","")
+            Log.d("VideoCipherPlaybackListener", "onTracksChanged")
         }
 
-        override fun onBufferUpdate(bufferTime: Long) {}
+        override fun onBufferUpdate(bufferTime: Long) {
+            Log.d("VideoCipherPlaybackListener", "onBufferUpdate")
+        }
 
         override fun onSeekTo(millis: Long) {
-            Log.i(TAG, "onSeekTo: $millis")
+            Log.d("VideoCipherPlaybackListener", "onSeekTO")
         }
 
         override fun onProgress(millis: Long) {}
 
         override fun onPlaybackSpeedChanged(speed: Float) {
-            Log.i(TAG, "onPlaybackSpeedChanged $speed")
-            Log.d("onPlaybackSpeedChanged $speed","")
+            Log.d("VideoCipherPlaybackListener", "onPlaybackSpeedChanged $speed")
         }
 
         override fun onLoading(vdoInitParams: VdoInitParams) {
-            Log.i(TAG, "onLoading")
-            Log.d("onLoading","")
+            Log.d("VideoCipherPlaybackListener", "onLoading")
         }
 
         override fun onLoadError(vdoInitParams: VdoInitParams, errorDescription: ErrorDescription) {
             val err = "onLoadError code: " + errorDescription.errorCode + ": " + errorDescription.errorMsg
-            Log.e(TAG, err)
-            Log.d(err,"")
+            Log.d("VideoCipherPlaybackListener", "onLoadError "+ err)
         }
 
         override fun onLoaded(vdoInitParams: VdoInitParams) {
-            Log.i(TAG, "onLoaded")
-            Log.d("onLoaded","")
-//            playerControlView.verifyAndUpdateCaptionsButton()
+            Log.d("VideoCipherPlaybackListener", "onLoaded")
         }
 
         override fun onError(vdoParams: VdoInitParams, errorDescription: ErrorDescription) {
             val err = "onError code " + errorDescription.errorCode + ": " + errorDescription.errorMsg
-            Log.e(TAG, err)
-            Log.d(err,"")
+            Log.d("VideoCipherPlaybackListener", "onError " + err)
         }
 
         override fun onMediaEnded(vdoInitParams: VdoInitParams) {
-            Log.i(TAG, "onMediaEnded")
-            Log.d("onMediaEnded","")
+            Log.d("VideoCipherPlaybackListener", "onMediaEnded")
         }
     }
-
-
-
-
-
 
 
 
@@ -374,6 +362,11 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.promo_video_button -> {
+                loadVideoCipherVideo(obtainNewVdoParams(mCourse.video?.otp!!, mCourse.video?.playbackInfo!!))
+                showHideBtnPromo(false)
+            }
+
             R.id.course_details_instructor_container -> {
                 val bundle = Bundle()
                 bundle.putParcelable(App.USER, mCourse.teacher)
@@ -655,8 +648,8 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
                 mBinding.courseDetailsPlayerView.visibility = View.GONE
 
                 mBinding.courseDetailsPlayerControllerView.root.visibility = View.GONE
-                adjustLayoutToImg(R.id.course_details_img)
-                mBinding.courseDetailsImg.visibility = View.VISIBLE
+//                adjustLayoutToImg(R.id.course_details_img)
+//                mBinding.courseDetailsImg.visibility = View.VISIBLE
             }
             else -> {
                 adjustLayoutToImg(R.id.course_details_category_tv)
@@ -670,6 +663,14 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
 
         params.topToBottom = layout
         mBinding.courseDetailsMoreBtn.requestLayout()
+    }
+
+    fun showHideBtnPromo(show: Boolean){
+        if (show){
+            mBinding.promoVideoButton.visibility = View.VISIBLE
+        }else{
+            mBinding.promoVideoButton.visibility = View.GONE
+        }
     }
 
     private fun initTeacher() {
@@ -954,6 +955,8 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
             mLoadingDialog.dismiss()
 
             mCourse = item
+
+            loadVideoCipherVideo(obtainNewVdoParams(mCourse.video?.otp!!, mCourse.video?.playbackInfo!!))
 
             mBinding.courseDetailsMoreBtn.setOnClickListener(this)
             mBinding.courseDetailsSubscribeBtn.setOnClickListener(this)

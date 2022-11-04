@@ -9,8 +9,8 @@ class UserProfile : User, Parcelable {
     @SerializedName("students_count")
     var studentsCount = 0
 
-    @SerializedName("courses_count")
-    var coursesCount = 0
+//    @SerializedName("courses_count")
+//    var coursesCount = 0
 
     @SerializedName("reviews_count")
     var reviewsCount = 0
@@ -91,7 +91,7 @@ class UserProfile : User, Parcelable {
 
     constructor(parcel: Parcel) : super(parcel) {
         studentsCount = parcel.readInt()
-        coursesCount = parcel.readInt()
+//        coursesCount = parcel.readInt()
         reviewsCount = parcel.readInt()
         verified = parcel.readInt()
         appointmentsCount = parcel.readInt()
@@ -116,7 +116,7 @@ class UserProfile : User, Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         super.writeToParcel(parcel, flags)
         parcel.writeInt(studentsCount)
-        parcel.writeInt(coursesCount)
+//        parcel.writeInt(coursesCount)
         parcel.writeInt(reviewsCount)
         parcel.writeInt(appointmentsCount)
         parcel.writeStringList(educations)

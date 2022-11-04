@@ -397,6 +397,7 @@
     <string name="_list">List</string>
     <string name="student_results">Student Results</string>
     <string name="profile">Profile</string>
+    <string name="promo_video">Promo Video</string>
     <string name="quiz_information">Quiz infomration</string>
     <string name="start_quiz_desc">Are you sure you want to start this quiz?</string>
     <string name="quiz_has_no_question">Quiz has no question!</string>

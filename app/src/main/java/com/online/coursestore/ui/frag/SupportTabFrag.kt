@@ -34,6 +34,7 @@ class SupportTabFrag : NetworkObserverFragment() {
     private fun init() {
         val toolbarOptions = ToolbarOptions()
         toolbarOptions.startIcon = ToolbarOptions.Icon.NAV
+        toolbarOptions.endIcon = ToolbarOptions.Icon.BACK
 
         (activity as MainActivity).showToolbar(toolbarOptions, R.string.support_messages)
 

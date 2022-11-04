@@ -302,7 +302,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
         ) {
             val videoFromLocalDir = getVideoFromLocalDir()
 
-            if ((!mOfflineMode && URLUtil.isValidUrl(mFileItem!!.file)) || videoFromLocalDir != null) {
+            if ((!mOfflineMode && URLUtil.isValidUrl(mFileItem!!.download_link)) || videoFromLocalDir != null) {
                 mBinding.courseChapterItemPlayerView.visibility = View.VISIBLE
 
                 mVideoHelper = FileVideoPlayerHelper(requireContext())
@@ -313,7 +313,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
                     mLocalFilePath = videoFromLocalDir!!.absolutePath
                     (mVideoHelper as FileVideoPlayerHelper).initPlayer(videoFromLocalDir)
                 } else {
-                    mVideoHelper!!.initPlayer(mFileItem!!.file, null)
+                    mVideoHelper!!.initPlayer(mFileItem!!.download_link, null)
                 }
 
                 mBinding.courseChapterItemPlayerView.videoSurfaceView?.setOnClickListener {
@@ -329,11 +329,11 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
             val controllerParam =
                 mBinding.courseChapterItemPlayerControllerView.root.layoutParams as ConstraintLayout.LayoutParams
 
-            if (Utils.isYoutubeUrl(mFileItem!!.file)) {
+            if (Utils.isYoutubeUrl(mFileItem!!.download_link)) {
                 controllerParam.topToBottom = R.id.course_chapter_item_youtube_player_view
                 initYoutubePlayer()
                 initVideoController()
-            } else if (Utils.isVimeoUrl(mFileItem!!.file)) {
+            } else if (Utils.isVimeoUrl(mFileItem!!.download_link)) {
                 controllerParam.topToBottom = R.id.course_chapter_item_vimeo_player_view
                 initVimeoPlayer()
                 initVideoController()
@@ -402,7 +402,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
         val vimeoPlayerView = mBinding.courseChapterItemVimeoPlayerView
         mVideoHelper = VimeoVideoPlayerHelper(mBinding.courseChapterItemVimeoPlayerView)
         try {
-            mVideoHelper!!.initPlayer(Utils.extractFileNameFromUrl(mFileItem!!.file), null)
+            mVideoHelper!!.initPlayer(Utils.extractFileNameFromUrl(mFileItem!!.download_link), null)
             mVideoHelper!!.setOnCallbackListener(this@CourseChapterItemFrag)
             vimeoPlayerView.visibility = View.VISIBLE
         } catch (ex: NumberFormatException) {
@@ -425,7 +425,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
 
                 (mVideoHelper as YoutubeVideoPlayerHelper).hideYouTubeShareBtn()
                 mVideoHelper!!.initPlayer(
-                    Utils.extractFileNameFromUrl(mFileItem!!.file),
+                    Utils.extractFileNameFromUrl(mFileItem!!.download_link),
                     0
                 )
             }
@@ -457,11 +457,11 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
     }
 
     private fun showReadSwitch(authHasRead: Boolean) {
-        if (mCourse.hasUserBought && !mOfflineMode) {
-            mBinding.courseChapterItemReadSwitch.visibility = View.VISIBLE
-            mBinding.courseChapterItemReadSwitch.isChecked = authHasRead
-            mBinding.courseChapterItemReadSwitch.setOnCheckedChangeListener(this)
-        }
+//        if (mCourse.hasUserBought && !mOfflineMode) {
+//            mBinding.courseChapterItemReadSwitch.visibility = View.VISIBLE
+//            mBinding.courseChapterItemReadSwitch.isChecked = authHasRead
+//            mBinding.courseChapterItemReadSwitch.setOnCheckedChangeListener(this)
+//        }
     }
 
     private fun initTextItem() {
@@ -1007,7 +1007,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
             playerState.path = mLocalFilePath!!
             playerState.isLocalFile = true
         } else {
-            playerState.path = mFileItem!!.file
+            playerState.path = mFileItem!!.download_link
         }
 
         PlayerHelper.playerState = playerState
@@ -1039,7 +1039,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
             }
         }
 
-        mBinding.courseChapterItemReadSwitch.setOnCheckedChangeListener(null)
+//        mBinding.courseChapterItemReadSwitch.setOnCheckedChangeListener(null)
         mPresenter.changeItemStatus(chapterItemMark)
     }
 
@@ -1071,7 +1071,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
                     chapterItemMark.status.toBoolean()
             }
         } else {
-            mBinding.courseChapterItemReadSwitch.isChecked = !chapterItemMark.status.toBoolean()
+//            mBinding.courseChapterItemReadSwitch.isChecked = !chapterItemMark.status.toBoolean()
 
             ToastMaker.show(
                 requireContext(),
@@ -1081,7 +1081,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
             )
         }
 
-        mBinding.courseChapterItemReadSwitch.setOnCheckedChangeListener(this)
+//        mBinding.courseChapterItemReadSwitch.setOnCheckedChangeListener(this)
     }
 
     private fun updateInFiles(read: Boolean) {
@@ -1099,7 +1099,6 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
     override fun onClick(view: View?, position: Int, id: Int) {
         val item =
             (mBinding.courseChapterItemRelatedRv.adapter as CourseCommonRvAdapter).items[position]!!
-
         val bundle = Bundle()
         bundle.putInt(App.CHAPTER_POSITION, mChapterPosition)
         bundle.putInt(App.CHAPTER_ITEM_POSITION, mChapterItemPosition)
@@ -1122,6 +1121,7 @@ class CourseChapterItemFrag : Fragment(), View.OnClickListener, PlayerHelper.Lis
         } else if (activity is SplashScreenActivity) {
             (activity as SplashScreenActivity).transact(chapterFrag)
         }
+
     }
 
     override fun onLongClick(view: View?, position: Int, id: Int) {

@@ -167,9 +167,9 @@ class ClassListGridRvAdapter(
             }
 
         } else if (viewholder is GridViewHolder) {
-            Log.d("rating", course.rating.toString())
+            Log.d("courseTitle", course.title.toString())
+            viewholder.binding.itemCourseTitleTv.text = course.title
             if (course.rating > 0f){
-                viewholder.binding.itemCourseTitleTv.text = course.title
                 viewholder.binding.itemCourseRatingTv.text = course.rating.toString()
             }else{
                 viewholder.binding.ratingLayoutCourseItem.visibility = View.INVISIBLE
@@ -278,6 +278,7 @@ class ClassListGridRvAdapter(
                         context.getString(R.string.course)
                     }
                     else -> {
+                        viewholder.binding.itemCourseTypeDiscountTv.visibility = View.INVISIBLE
                         context.getString(R.string.text_lessson)
                     }
                 }

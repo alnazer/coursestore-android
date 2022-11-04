@@ -11,6 +11,7 @@ import com.online.coursestore.R
 import com.online.coursestore.databinding.ItemChapterBinding
 import com.online.coursestore.manager.App
 import com.online.coursestore.manager.ToastMaker
+import com.online.coursestore.manager.listener.ChapterClickListener
 import com.online.coursestore.manager.listener.ItemClickListener
 import com.online.coursestore.manager.listener.OnItemClickListener
 import com.online.coursestore.model.*
@@ -21,7 +22,8 @@ import com.online.coursestore.ui.frag.*
 class ChapterRvAdapter(
     items: List<ContentItem>,
     private val course: Course,
-    private val activity: MainActivity
+    private val activity: MainActivity,
+    val chapterClickListener: ChapterClickListener
 ) :
     BaseArrayAdapter<ContentItem, ChapterRvAdapter.ViewHolder>(items) {
 
@@ -83,8 +85,13 @@ class ChapterRvAdapter(
                             showBuyAlert()
                             return
                         }
-
-                        bundle.putParcelable(App.ITEM, item)
+                        if (item.isVideo){
+                            chapterClickListener.onClick(item)
+                            return
+                        }
+                        else{
+                            bundle.putParcelable(App.ITEM, item)
+                        }
                     }
                     is ChapterTextItem -> {
                         if (item.accessibility == ChapterFileItem.Accessibility.PAID.value && !course.hasUserBought) {
@@ -94,7 +101,6 @@ class ChapterRvAdapter(
                         bundle.putParcelable(App.ITEM, item)
                     }
                 }
-
                 nextFrag = CourseChapterItemFrag()
 
             } else if (item is Quiz) {

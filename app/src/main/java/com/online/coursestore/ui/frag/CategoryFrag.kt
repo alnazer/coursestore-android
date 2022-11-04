@@ -21,6 +21,7 @@ import com.online.coursestore.ui.MainActivity
 import com.online.coursestore.ui.frag.abstract.EmptyState
 import com.online.coursestore.ui.widget.ClassesFiltersDialog
 import com.online.coursestore.ui.widget.ClassesOptionsDialog
+import com.paypal.platform.authsdk.partnerauth.lls.domain.VISITOR_ID
 
 class CategoryFrag : NetworkObserverFragment(), View.OnClickListener, EmptyState {
 
@@ -85,6 +86,10 @@ class CategoryFrag : NetworkObserverFragment(), View.OnClickListener, EmptyState
 
         mPresenter.getCatFeaturedCourses(mCategory.id)
         mPresenter.getCatFiltersAndCourses(mCategory.id)
+    }
+
+    fun showProgress(){
+        mBinding.categoryCourseRvProgressBar.visibility = View.VISIBLE
     }
 
     override fun onClick(v: View?) {
@@ -166,15 +171,15 @@ class CategoryFrag : NetworkObserverFragment(), View.OnClickListener, EmptyState
     }
 
     fun onFeaturedCoursesReceived(data: Data<List<Course>>) {
-        mBinding.categoryFeaturedViewPagerProgressBar.visibility = View.GONE
-        if (data.data!!.isNotEmpty()) {
-            val adapter = FeaturedSliderAdapter(data.data!!, activity as MainActivity)
-            mBinding.categoryFeaturedViewPager.adapter = adapter
-            mBinding.categoryFeaturedIndicator.setViewPager2(mBinding.categoryFeaturedViewPager)
-        } else {
-            mBinding.categoryFeaturedViewPager.visibility = View.GONE
-            mBinding.categoryFeaturedIndicator.visibility = View.GONE
-        }
+//        mBinding.categoryFeaturedViewPagerProgressBar.visibility = View.GONE
+//        if (data.data!!.isNotEmpty()) {
+//            val adapter = FeaturedSliderAdapter(data.data!!, activity as MainActivity)
+//            mBinding.categoryFeaturedViewPager.adapter = adapter
+//            mBinding.categoryFeaturedIndicator.setViewPager2(mBinding.categoryFeaturedViewPager)
+//        } else {
+//            mBinding.categoryFeaturedViewPager.visibility = View.GONE
+//            mBinding.categoryFeaturedIndicator.visibility = View.GONE
+//        }
     }
 
     fun showEmptyState() {

@@ -42,6 +42,7 @@ class QuizzesTabFrag : Fragment() {
 
         val toolbarOptions = ToolbarOptions()
         toolbarOptions.startIcon = ToolbarOptions.Icon.NAV
+        toolbarOptions.endIcon = ToolbarOptions.Icon.BACK
 
         (activity as MainActivity).showToolbar(toolbarOptions, R.string.quizzes)
 

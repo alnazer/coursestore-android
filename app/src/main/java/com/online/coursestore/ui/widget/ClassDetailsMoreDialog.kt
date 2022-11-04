@@ -112,10 +112,13 @@ class ClassDetailsMoreDialog : NetworkObserverBottomSheetDialog(), View.OnClickL
         if (context == null) return
 
         if (response.isSuccessful) {
+
             if (mBinding.courseDetailsMoreAddToFavoritesBtn.text == getString(R.string.add_to_favorites)) {
+                mBinding.courseDetailsMoreAddToFavoritesBtn.setCompoundDrawablesWithIntrinsicBounds(null,null,requireContext().getDrawable(R.drawable.ic_heart_filled),null)
                 mBinding.courseDetailsMoreAddToFavoritesBtn.text =
                     getString(R.string.remove_from_favorites)
             } else {
+                mBinding.courseDetailsMoreAddToFavoritesBtn.setCompoundDrawablesWithIntrinsicBounds(null,null,requireContext().getDrawable(R.drawable.ic_heart),null)
                 mBinding.courseDetailsMoreAddToFavoritesBtn.text =
                     getString(R.string.add_to_favorites)
             }

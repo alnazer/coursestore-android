@@ -32,8 +32,8 @@ class ChapterFileItem() : Parcelable, CourseCommonItem {
     @SerializedName("description")
     var description: String? = null
 
-    @SerializedName("file")
-    lateinit var file: String
+    @SerializedName("download_link")
+    lateinit var download_link: String
 
     @SerializedName("volume")
     lateinit var volume: String
@@ -43,6 +43,15 @@ class ChapterFileItem() : Parcelable, CourseCommonItem {
 
     @SerializedName("storage")
     lateinit var storage: String
+
+    @SerializedName("file")
+    lateinit var file: String
+
+    @SerializedName("video_cipher_data")
+    var videoCipherData: Any? = null
+
+    @SerializedName("is_video")
+    var isVideo: Boolean = false
 
     @SerializedName("status")
     lateinit var status: String
@@ -69,26 +78,32 @@ class ChapterFileItem() : Parcelable, CourseCommonItem {
         id = parcel.readInt()
         title = parcel.readString()!!
         description = parcel.readString()
+        isVideo = parcel.readBoolean()
         file = parcel.readString()!!
+        videoCipherData = parcel.readValue(VideoCipherData::class.java.classLoader)
         volume = parcel.readString()!!
         fileType = parcel.readString()!!
         storage = parcel.readString()!!
         status = parcel.readString()!!
         accessibility = parcel.readString()!!
         createdAt = parcel.readLong()
-        downloadable = parcel.readInt()
+        downloadable = parcel.readInt()!!
         authHasRead = parcel.readByte() != 0.toByte()
         interactiveType = parcel.readString()
         interactiveFilePath = parcel.readString()
+        download_link = parcel.readString()!!
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(title)
+        parcel.writeString(download_link)
         parcel.writeString(description)
         parcel.writeString(file)
+        parcel.writeValue(videoCipherData)
         parcel.writeString(volume)
         parcel.writeString(fileType)
+        parcel.writeBoolean(isVideo)
         parcel.writeString(storage)
         parcel.writeString(status)
         parcel.writeString(accessibility)

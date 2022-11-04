@@ -1,22 +1,26 @@
 package com.online.coursestore.ui.frag
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.online.coursestore.R
 import com.online.coursestore.databinding.RvNestedBinding
 import com.online.coursestore.manager.App
 import com.online.coursestore.manager.Utils
 import com.online.coursestore.manager.adapter.ChapterRvAdapter
+import com.online.coursestore.manager.listener.ChapterClickListener
 import com.online.coursestore.manager.net.observer.NetworkObserverFragment
 import com.online.coursestore.model.*
 import com.online.coursestore.model.view.ContentItem
 import com.online.coursestore.ui.MainActivity
 import kotlin.math.roundToInt
 
-class CourseDetailsContentFrag : NetworkObserverFragment() {
+class CourseDetailsContentFrag : NetworkObserverFragment(), ChapterClickListener {
 
     private lateinit var mBinding: RvNestedBinding
 
@@ -104,8 +108,19 @@ class CourseDetailsContentFrag : NetworkObserverFragment() {
             }
         }
 
-        val adapter = ChapterRvAdapter(contentItems, course, activity as MainActivity)
+        val adapter = ChapterRvAdapter(contentItems, course, activity as MainActivity, this)
         mBinding.rvNestedRv.layoutManager = LinearLayoutManager(requireContext())
         mBinding.rvNestedRv.adapter = adapter
     }
+
+    override fun onClick(chapterFileItem: ChapterFileItem) {
+        var gson = Gson()
+        var videoCipherdata:VideoCipherData = gson.fromJson(gson.toJsonTree(chapterFileItem.videoCipherData).asJsonObject, VideoCipherData::class.java)
+        (parentFragment as CourseDetailsFrag).loadVideoCipherVideo(
+            (parentFragment as CourseDetailsFrag).obtainNewVdoParams(videoCipherdata.otp!!,
+                videoCipherdata.playbackInfo!!)
+        )
+        (parentFragment as CourseDetailsFrag).showHideBtnPromo(true)
+    }
+
 }
