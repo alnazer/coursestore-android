@@ -89,6 +89,8 @@
     <string name="close">Close</string>
     <string name="reply">Reply</string>
     <string name="attachment">Attachment</string>
+    <string name="soon_courses">Soon</string>
+    <string name="all_courses">All Courses</string>
     <string name="close_ticket_desc">Are you sure to close this ticket?</string>
     <string name="cannot_open_this_file">No viewer found for this file!</string>
     <string name="downloading">Descargando…</string>

@@ -15,11 +15,13 @@ import com.online.coursestore.databinding.FragHomeBinding
 import com.online.coursestore.manager.App
 import com.online.coursestore.manager.adapter.HomeClassRvAdapter
 import com.online.coursestore.manager.adapter.FeaturedSliderAdapter
+import com.online.coursestore.manager.adapter.HomeSoonAdapter
 import com.online.coursestore.manager.listener.ItemCallback
 import com.online.coursestore.manager.net.observer.NetworkObserverFragment
 import com.online.coursestore.model.Course
 import com.online.coursestore.model.Data
 import com.online.coursestore.model.QuickInfo
+import com.online.coursestore.model.SoonCourse
 import com.online.coursestore.presenter.Presenter
 import com.online.coursestore.presenterImpl.CommonApiPresenterImpl
 import com.online.coursestore.presenterImpl.HomePresenterImpl
@@ -71,25 +73,30 @@ class HomeFrag : NetworkObserverFragment(), ViewTreeObserver.OnScrollChangedList
                 map = mBinding.homeNewestClasseRv.tag as HashMap<String, String>
             }
 
-            R.id.homeViewAllBestRatedBtn -> {
-                title = mBinding.homeBestRatedTv.text.toString()
-                map = mBinding.homeBestRatedRv.tag as HashMap<String, String>
+            R.id.homeViewAllAllBtn -> {
+                title = mBinding.homeAllTv.text.toString()
+                map = mBinding.homeAllRv.tag as HashMap<String, String>
             }
 
-            R.id.homeViewAllBestSellersBtn -> {
-                title = mBinding.homeBestSellersTv.text.toString()
-                map = mBinding.homeBestSellersRv.tag as HashMap<String, String>
-            }
+//            R.id.homeViewAllBestRatedBtn -> {
+//                title = mBinding.homeBestRatedTv.text.toString()
+//                map = mBinding.homeBestRatedRv.tag as HashMap<String, String>
+//            }
 
-            R.id.homeViewAllDiscountedClassesBtn -> {
-                title = mBinding.homeDiscountedClassesTv.text.toString()
-                map = mBinding.homeDiscountedClassesRv.tag as HashMap<String, String>
-            }
-
-            R.id.homeViewAllFreeClassesBtn -> {
-                title = mBinding.homeFreeClassesTv.text.toString()
-                map = mBinding.homeFreeClassesRv.tag as HashMap<String, String>
-            }
+//            R.id.homeViewAllBestSellersBtn -> {
+//                title = mBinding.homeBestSellersTv.text.toString()
+//                map = mBinding.homeBestSellersRv.tag as HashMap<String, String>
+//            }
+//
+//            R.id.homeViewAllDiscountedClassesBtn -> {
+//                title = mBinding.homeDiscountedClassesTv.text.toString()
+//                map = mBinding.homeDiscountedClassesRv.tag as HashMap<String, String>
+//            }
+//
+//            R.id.homeViewAllFreeClassesBtn -> {
+//                title = mBinding.homeFreeClassesTv.text.toString()
+//                map = mBinding.homeFreeClassesRv.tag as HashMap<String, String>
+//            }
 
             else -> {
                 return@OnClickListener
@@ -136,10 +143,11 @@ class HomeFrag : NetworkObserverFragment(), ViewTreeObserver.OnScrollChangedList
 
         mBinding.homeSearchLayout.setOnClickListener(this)
         mBinding.homeViewAllNewestClassesBtn.setOnClickListener(mViewAllBtnListener)
-        mBinding.homeViewAllBestRatedBtn.setOnClickListener(mViewAllBtnListener)
-        mBinding.homeViewAllBestSellersBtn.setOnClickListener(mViewAllBtnListener)
-        mBinding.homeViewAllDiscountedClassesBtn.setOnClickListener(mViewAllBtnListener)
-        mBinding.homeViewAllFreeClassesBtn.setOnClickListener(mViewAllBtnListener)
+        mBinding.homeViewAllAllBtn.setOnClickListener(mViewAllBtnListener)
+//        mBinding.homeViewAllBestRatedBtn.setOnClickListener(mViewAllBtnListener)
+//        mBinding.homeViewAllBestSellersBtn.setOnClickListener(mViewAllBtnListener)
+//        mBinding.homeViewAllDiscountedClassesBtn.setOnClickListener(mViewAllBtnListener)
+//        mBinding.homeViewAllFreeClassesBtn.setOnClickListener(mViewAllBtnListener)
         mBinding.homeHeaderNavBtn.setOnClickListener(this)
         mBinding.homeHeaderNotificatonBtn.setOnClickListener(this)
         mBinding.homeHeaderCartBtn.setOnClickListener(this)
@@ -174,32 +182,41 @@ class HomeFrag : NetworkObserverFragment(), ViewTreeObserver.OnScrollChangedList
         mPresenter.getNewestCourses(map)
 
         map = HashMap()
-        map["sort"] = "best_rates"
-        map["offset"] = OFFSET.toString()
-        map["limit"] = LIMIT.toString()
-        mBinding.homeBestRatedRv.tag = map
-        mPresenter.getBestRatedCourses(map)
-
-        map = HashMap()
         map["sort"] = "bestsellers"
         map["offset"] = OFFSET.toString()
         map["limit"] = LIMIT.toString()
-        mBinding.homeBestSellersRv.tag = map
-        mPresenter.getBestSellingCourses(map)
+        mBinding.homeAllRv.tag = map
+        mPresenter.getAllCourses(map)
 
-        map = HashMap()
-        map["discount"] = "1"
-        map["offset"] = OFFSET.toString()
-        map["limit"] = LIMIT.toString()
-        mBinding.homeDiscountedClassesRv.tag = map
-        mPresenter.getDiscountedCourses(map)
+        mPresenter.getSoonCourses()
 
-        map = HashMap()
-        map["free"] = "1"
-        map["offset"] = OFFSET.toString()
-        map["limit"] = LIMIT.toString()
-        mBinding.homeFreeClassesRv.tag = map
-        mPresenter.getFreeCourses(map)
+//        map = HashMap()
+//        map["sort"] = "best_rates"
+//        map["offset"] = OFFSET.toString()
+//        map["limit"] = LIMIT.toString()
+//        mBinding.homeBestRatedRv.tag = map
+//        mPresenter.getBestRatedCourses(map)
+
+//        map = HashMap()
+//        map["sort"] = "bestsellers"
+//        map["offset"] = OFFSET.toString()
+//        map["limit"] = LIMIT.toString()
+//        mBinding.homeBestSellersRv.tag = map
+//        mPresenter.getBestSellingCourses(map)
+//
+//        map = HashMap()
+//        map["discount"] = "1"
+//        map["offset"] = OFFSET.toString()
+//        map["limit"] = LIMIT.toString()
+//        mBinding.homeDiscountedClassesRv.tag = map
+//        mPresenter.getDiscountedCourses(map)
+//
+//        map = HashMap()
+//        map["free"] = "1"
+//        map["offset"] = OFFSET.toString()
+//        map["limit"] = LIMIT.toString()
+//        mBinding.homeFreeClassesRv.tag = map
+//        mPresenter.getFreeCourses(map)
     }
 
 
@@ -364,36 +381,67 @@ class HomeFrag : NetworkObserverFragment(), ViewTreeObserver.OnScrollChangedList
         )
     }
 
-    fun onBestRatedCoursesRecevied(data: Data<List<Course>>) {
-        addToRv(data.data!!, mBinding.homeBestRatedProgressBar, mBinding.homeBestRatedRv)
-    }
+//    fun onBestRatedCoursesRecevied(data: Data<List<Course>>) {
+//        addToRv(data.data!!, mBinding.homeBestRatedProgressBar, mBinding.homeBestRatedRv)
+//    }
 
-    fun onBestSellersCoursesRecevied(data: Data<List<Course>>) {
-        addToRv(data.data!!, mBinding.homeBestSellersProgressBar, mBinding.homeBestSellersRv)
-    }
+//    fun onBestSellersCoursesRecevied(data: Data<List<Course>>) {
+//        addToRv(data.data!!, mBinding.homeBestSellersProgressBar, mBinding.homeBestSellersRv)
+//    }
 
-    fun onFreeCoursesRecevied(data: Data<List<Course>>) {
+//    fun onFreeCoursesRecevied(data: Data<List<Course>>) {
+//        if (data.data!!.isEmpty()) {
+//            mBinding.homeViewAllFreeClassesBtn.visibility = View.GONE
+//            mBinding.homeFreeClassesRv.visibility = View.GONE
+//            mBinding.homeFreeClassesProgressBar.visibility = View.GONE
+//            mBinding.homeFreeClassesRv.visibility = View.GONE
+//        } else {
+//            addToRv(data.data!!, mBinding.homeFreeClassesProgressBar, mBinding.homeFreeClassesRv)
+//        }
+//    }
+
+//    fun onDiscountedCoursesRecevied(data: Data<List<Course>>) {
+//        if (data.data!!.isEmpty()) {
+//            mBinding.homeViewAllDiscountedClassesBtn.visibility = View.GONE
+//            mBinding.homeDiscountedClassesRv.visibility = View.GONE
+//            mBinding.homeDiscountedClassesProgressBar.visibility = View.GONE
+//            mBinding.homeDiscountedClassesTv.visibility = View.GONE
+//        } else {
+//            addToRv(
+//                data.data!!,
+//                mBinding.homeDiscountedClassesProgressBar,
+//                mBinding.homeDiscountedClassesRv
+//            )
+//        }
+//
+//    }
+
+    fun onAllCoursesRecevied(data: Data<List<Course>>) {
         if (data.data!!.isEmpty()) {
-            mBinding.homeViewAllFreeClassesBtn.visibility = View.GONE
-            mBinding.homeFreeClassesRv.visibility = View.GONE
-            mBinding.homeFreeClassesProgressBar.visibility = View.GONE
-            mBinding.homeFreeClassesRv.visibility = View.GONE
-        } else {
-            addToRv(data.data!!, mBinding.homeFreeClassesProgressBar, mBinding.homeFreeClassesRv)
-        }
-    }
-
-    fun onDiscountedCoursesRecevied(data: Data<List<Course>>) {
-        if (data.data!!.isEmpty()) {
-            mBinding.homeViewAllDiscountedClassesBtn.visibility = View.GONE
-            mBinding.homeDiscountedClassesRv.visibility = View.GONE
-            mBinding.homeDiscountedClassesProgressBar.visibility = View.GONE
-            mBinding.homeDiscountedClassesTv.visibility = View.GONE
+            mBinding.homeViewAllAllBtn.visibility = View.GONE
+            mBinding.homeAllRv.visibility = View.GONE
+            mBinding.homeAllProgressBar.visibility = View.GONE
+            mBinding.homeAllTv.visibility = View.GONE
         } else {
             addToRv(
                 data.data!!,
-                mBinding.homeDiscountedClassesProgressBar,
-                mBinding.homeDiscountedClassesRv
+                mBinding.homeAllProgressBar,
+                mBinding.homeAllRv
+            )
+        }
+
+    }
+
+    fun onSoonCoursesRecevied(data: Data<List<SoonCourse>>) {
+        if (data.data!!.isEmpty()) {
+            mBinding.homeSoonRv.visibility = View.GONE
+            mBinding.homeSoonProgressBar.visibility = View.GONE
+            mBinding.homeSoonTv.visibility = View.GONE
+        } else {
+            addSoonToRv(
+                data.data!!,
+                mBinding.homeSoonProgressBar,
+                mBinding.homeSoonRv
             )
         }
 
@@ -410,4 +458,17 @@ class HomeFrag : NetworkObserverFragment(), ViewTreeObserver.OnScrollChangedList
 
         rv.adapter = HomeClassRvAdapter(data, activity as MainActivity)
     }
+
+    private fun addSoonToRv(
+        data: List<SoonCourse>,
+        progressBar: ProgressBar,
+        rv: RecyclerView
+    ) {
+        progressBar.visibility = View.GONE
+        rv.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        rv.adapter = HomeSoonAdapter(data, activity as MainActivity)
+    }
+
 }

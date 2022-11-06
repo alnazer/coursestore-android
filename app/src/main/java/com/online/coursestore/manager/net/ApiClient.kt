@@ -40,6 +40,9 @@ interface ApiClient {
     @GET("courses")
     fun getCourses(@QueryMap map: Map<String, String>): Call<Data<List<Course>>>
 
+    @GET("home/soon")
+    fun getSoonCourses(): Call<Data<List<SoonCourse>>>
+
     @GET("featured-courses")
     fun getFeaturedCourses(): Call<Data<List<Course>>>
 

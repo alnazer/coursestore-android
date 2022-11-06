@@ -38,7 +38,9 @@ class Presenter {
 
     interface HomePresenter {
         fun getFeaturedCourses()
+        fun getSoonCourses()
         fun getNewestCourses(map: HashMap<String, String>)
+        fun getAllCourses(map: HashMap<String, String>)
         fun getBestRatedCourses(map: HashMap<String, String>)
         fun getBestSellingCourses(map: HashMap<String, String>)
         fun getDiscountedCourses(map: HashMap<String, String>)

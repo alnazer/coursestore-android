@@ -71,6 +71,8 @@
     <string name="view_all">View All</string>
     <string name="best_rated">Best Rated</string>
     <string name="best_selling">Best Selling</string>
+    <string name="all_courses">All Courses</string>
+    <string name="soon_courses">Soon</string>
     <string name="discounted_classes">Discounted Courses</string>
     <string name="free_classes">Free Courses</string>
     <string name="save">Save</string>

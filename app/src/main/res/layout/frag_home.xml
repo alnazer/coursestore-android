@@ -245,7 +245,7 @@
                 android:id="@+id/homeFeaturedViewPager"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:minHeight="200dp"
                 android:padding="@dimen/zero"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -303,7 +303,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginTop="@dimen/margin_16"
                 android:layout_marginEnd="@dimen/margin_16"
                 android:fontFamily="@font/bold"
                 android:text="@string/newest_classes"
@@ -332,7 +332,6 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:fontFamily="@font/regular"
                 android:gravity="center"
@@ -346,6 +345,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/text_color3"
                 android:textSize="@dimen/textsize_14d"
+                app:layout_constraintBottom_toTopOf="@+id/homeNewestClasseRv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/homeFeaturedIndicator"
                 app:rippleColor="@color/rippleColor" />
@@ -355,74 +355,74 @@
                 android:id="@+id/homeNewestClasseRv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginTop="@dimen/margin_16"
                 android:minHeight="230dp"
                 android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/homeNewestClassesTv" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/homeBestRatedTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_4"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:fontFamily="@font/bold"
-                android:text="@string/best_rated"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textsize_20d"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/homeNewestClasseRv" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/homeBestRatedTv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_4"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:fontFamily="@font/bold"-->
+<!--                android:text="@string/best_rated"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                android:textSize="@dimen/textsize_20d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/homeNewestClasseRv" />-->
 
-            <ProgressBar
-                android:id="@+id/homeBestRatedProgressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_16"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:layout_marginBottom="@dimen/margin_16"
-                app:layout_constraintBottom_toBottomOf="@+id/homeBestRatedRv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/homeBestRatedRv" />
+<!--            <ProgressBar-->
+<!--                android:id="@+id/homeBestRatedProgressBar"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_16"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:layout_marginBottom="@dimen/margin_16"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/homeBestRatedRv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/homeBestRatedRv" />-->
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/homeViewAllBestRatedBtn"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginEnd="@dimen/margin_8"
-                android:fontFamily="@font/regular"
-                android:gravity="center"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:paddingStart="@dimen/margin_8"
-                android:paddingTop="@dimen/margin_4"
-                android:paddingEnd="@dimen/margin_8"
-                android:paddingBottom="@dimen/margin_4"
-                android:text="@string/view_all"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/textsize_14d"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeNewestClasseRv"
-                app:rippleColor="@color/rippleColor" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/homeViewAllBestRatedBtn"-->
+<!--                style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_8"-->
+<!--                android:layout_marginEnd="@dimen/margin_8"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:gravity="center"-->
+<!--                android:minWidth="0dp"-->
+<!--                android:minHeight="0dp"-->
+<!--                android:paddingStart="@dimen/margin_8"-->
+<!--                android:paddingTop="@dimen/margin_4"-->
+<!--                android:paddingEnd="@dimen/margin_8"-->
+<!--                android:paddingBottom="@dimen/margin_4"-->
+<!--                android:text="@string/view_all"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/text_color3"-->
+<!--                android:textSize="@dimen/textsize_14d"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeNewestClasseRv"-->
+<!--                app:rippleColor="@color/rippleColor" />-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeBestRatedRv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4"
-                android:minHeight="230dp"
-                android:nestedScrollingEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeBestRatedTv" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/homeBestRatedRv"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/margin_4"-->
+<!--                android:minHeight="230dp"-->
+<!--                android:nestedScrollingEnabled="true"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeBestRatedTv" />-->
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -430,13 +430,13 @@
                 android:layout_width="0dp"
                 android:layout_height="170dp"
                 android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_4"
                 android:layout_marginEnd="@dimen/margin_16"
                 android:background="@drawable/round_view_white_corner20"
                 android:padding="@dimen/padding_16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeBestRatedRv">
+                app:layout_constraintTop_toBottomOf="@+id/homeNewestClasseRv">
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -499,73 +499,74 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/homeSpecialViewPager"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:padding="@dimen/zero"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/homeRewardCoursesContainer" />
+<!--            <androidx.viewpager2.widget.ViewPager2-->
+<!--                android:id="@+id/homeSpecialViewPager"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_8"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:padding="@dimen/zero"-->
+<!--                android:visibility="gone"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/homeRewardCoursesContainer" />-->
 
 
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/homeSpecialIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginBottom="50dp"
-                android:padding="@dimen/zero"
-                android:visibility="gone"
-                app:dotsColor="@color/gray81"
-                app:dotsSize="10dp"
-                app:dotsSpacing="5dp"
-                app:dotsWidthFactor="2.5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/homeRewardCoursesContainer"
-                app:layout_constraintVertical_bias="0.5"
-                app:progressMode="false"
-                app:selectedDotColor="@color/accent" />
+<!--            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator-->
+<!--                android:id="@+id/homeSpecialIndicator"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/margin_8"-->
+<!--                android:layout_marginBottom="50dp"-->
+<!--                android:padding="@dimen/zero"-->
+<!--                android:visibility="gone"-->
+<!--                app:dotsColor="@color/gray81"-->
+<!--                app:dotsSize="10dp"-->
+<!--                app:dotsSpacing="5dp"-->
+<!--                app:dotsWidthFactor="2.5"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/homeRewardCoursesContainer"-->
+<!--                app:layout_constraintVertical_bias="0.5"-->
+<!--                app:progressMode="false"-->
+<!--                app:selectedDotColor="@color/accent" />-->
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/homeBestSellersTv"
+                android:id="@+id/homeAllTv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_4"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
                 android:layout_marginEnd="@dimen/margin_16"
                 android:fontFamily="@font/bold"
-                android:text="@string/best_selling"
+                android:text="@string/all_courses"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/textsize_20d"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/homeRewardCoursesContainer" />
 
             <ProgressBar
-                android:id="@+id/homeBestSellersProgressBar"
+                android:id="@+id/homeAllProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16"
                 android:layout_marginBottom="@dimen/margin_16"
-                app:layout_constraintBottom_toBottomOf="@+id/homeBestSellersRv"
+                app:layout_constraintBottom_toBottomOf="@+id/homeAllRv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/homeBestSellersRv" />
+                app:layout_constraintTop_toTopOf="@+id/homeAllRv" />
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/homeViewAllBestSellersBtn"
+                android:id="@+id/homeViewAllAllBtn"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
                 android:fontFamily="@font/regular"
                 android:gravity="center"
                 android:minWidth="0dp"
@@ -585,175 +586,275 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeBestSellersRv"
+                android:id="@+id/homeAllRv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginTop="@dimen/margin_16"
                 android:minHeight="230dp"
                 android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeBestSellersTv" />
+                app:layout_constraintTop_toBottomOf="@+id/homeAllTv" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/homeDiscountedClassesTv"
+                android:id="@+id/homeSoonTv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_4"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
                 android:layout_marginEnd="@dimen/margin_16"
                 android:fontFamily="@font/bold"
-                android:text="@string/discounted_classes"
+                android:text="@string/soon_courses"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/textsize_20d"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/homeBestSellersRv" />
+                app:layout_constraintTop_toBottomOf="@id/homeAllRv" />
 
             <ProgressBar
-                android:id="@+id/homeDiscountedClassesProgressBar"
+                android:id="@+id/homeSoonProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:layout_marginEnd="@dimen/margin_16"
                 android:layout_marginBottom="@dimen/margin_16"
-                app:layout_constraintBottom_toBottomOf="@+id/homeDiscountedClassesRv"
+                app:layout_constraintBottom_toBottomOf="@+id/homeSoonRv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/homeDiscountedClassesRv" />
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/homeViewAllDiscountedClassesBtn"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginEnd="@dimen/margin_8"
-                android:fontFamily="@font/regular"
-                android:gravity="center"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:paddingStart="@dimen/margin_8"
-                android:paddingTop="@dimen/margin_4"
-                android:paddingEnd="@dimen/margin_8"
-                android:paddingBottom="@dimen/margin_4"
-                android:text="@string/view_all"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/textsize_14d"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeBestSellersRv"
-                app:rippleColor="@color/rippleColor" />
+                app:layout_constraintTop_toTopOf="@+id/homeSoonRv" />
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeDiscountedClassesRv"
+                android:id="@+id/homeSoonRv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginTop="@dimen/margin_16"
                 android:minHeight="230dp"
                 android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeDiscountedClassesTv" />
+                app:layout_constraintTop_toBottomOf="@+id/homeSoonTv" />
 
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/homeSpecial2ViewPager"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:padding="@dimen/zero"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/homeDiscountedClassesRv" />
+            <!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/homeBestSellersTv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_4"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:fontFamily="@font/bold"-->
+<!--                android:text="@string/best_selling"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                android:textSize="@dimen/textsize_20d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/homeRewardCoursesContainer" />-->
+
+<!--            <ProgressBar-->
+<!--                android:id="@+id/homeBestSellersProgressBar"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/margin_16"-->
+<!--                android:layout_marginBottom="@dimen/margin_16"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/homeBestSellersRv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/homeBestSellersRv" />-->
 
 
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/homeSpecial2Indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:layout_marginBottom="50dp"
-                android:padding="@dimen/zero"
-                app:dotsColor="@color/gray81"
-                app:dotsSize="10dp"
-                app:dotsSpacing="5dp"
-                app:dotsWidthFactor="2.5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/homeSpecial2ViewPager"
-                app:layout_constraintVertical_bias="0.5"
-                app:progressMode="false"
-                app:selectedDotColor="@color/accent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/homeFreeClassesTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_4"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:fontFamily="@font/bold"
-                android:text="@string/free_classes"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textsize_20d"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/homeSpecial2Indicator" />
-
-            <ProgressBar
-                android:id="@+id/homeFreeClassesProgressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_16"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:layout_marginBottom="@dimen/margin_16"
-                app:layout_constraintBottom_toBottomOf="@+id/homeFreeClassesRv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/homeFreeClassesRv" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/homeViewAllBestSellersBtn"-->
+<!--                style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_8"-->
+<!--                android:layout_marginEnd="@dimen/margin_8"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:gravity="center"-->
+<!--                android:minWidth="0dp"-->
+<!--                android:minHeight="0dp"-->
+<!--                android:paddingStart="@dimen/margin_8"-->
+<!--                android:paddingTop="@dimen/margin_4"-->
+<!--                android:paddingEnd="@dimen/margin_8"-->
+<!--                android:paddingBottom="@dimen/margin_4"-->
+<!--                android:text="@string/view_all"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/text_color3"-->
+<!--                android:textSize="@dimen/textsize_14d"-->
+<!--                android:visibility="visible"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeRewardCoursesContainer"-->
+<!--                app:rippleColor="@color/rippleColor" />-->
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/homeViewAllFreeClassesBtn"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginEnd="@dimen/margin_8"
-                android:fontFamily="@font/regular"
-                android:gravity="center"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:paddingStart="@dimen/margin_8"
-                android:paddingTop="@dimen/margin_4"
-                android:paddingEnd="@dimen/margin_8"
-                android:paddingBottom="@dimen/margin_4"
-                android:text="@string/view_all"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/textsize_14d"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeSpecial2Indicator"
-                app:rippleColor="@color/rippleColor" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/homeBestSellersRv"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/margin_4"-->
+<!--                android:minHeight="230dp"-->
+<!--                android:nestedScrollingEnabled="true"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeBestSellersTv" />-->
+
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/homeDiscountedClassesTv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_4"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:fontFamily="@font/bold"-->
+<!--                android:text="@string/discounted_classes"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                android:textSize="@dimen/textsize_20d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/homeBestSellersRv" />-->
+
+<!--            <ProgressBar-->
+<!--                android:id="@+id/homeDiscountedClassesProgressBar"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_16"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:layout_marginBottom="@dimen/margin_16"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/homeDiscountedClassesRv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/homeDiscountedClassesRv" />-->
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeFreeClassesRv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4"
-                android:minHeight="230dp"
-                android:nestedScrollingEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeFreeClassesTv" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/homeViewAllDiscountedClassesBtn"-->
+<!--                style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_8"-->
+<!--                android:layout_marginEnd="@dimen/margin_8"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:gravity="center"-->
+<!--                android:minWidth="0dp"-->
+<!--                android:minHeight="0dp"-->
+<!--                android:paddingStart="@dimen/margin_8"-->
+<!--                android:paddingTop="@dimen/margin_4"-->
+<!--                android:paddingEnd="@dimen/margin_8"-->
+<!--                android:paddingBottom="@dimen/margin_4"-->
+<!--                android:text="@string/view_all"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/text_color3"-->
+<!--                android:textSize="@dimen/textsize_14d"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeBestSellersRv"-->
+<!--                app:rippleColor="@color/rippleColor" />-->
+
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/homeDiscountedClassesRv"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/margin_4"-->
+<!--                android:minHeight="230dp"-->
+<!--                android:nestedScrollingEnabled="true"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeDiscountedClassesTv" />-->
+
+
+<!--            <androidx.viewpager2.widget.ViewPager2-->
+<!--                android:id="@+id/homeSpecial2ViewPager"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_8"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:padding="@dimen/zero"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/homeDiscountedClassesRv" />-->
+
+
+<!--            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator-->
+<!--                android:id="@+id/homeSpecial2Indicator"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_8"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:layout_marginBottom="50dp"-->
+<!--                android:padding="@dimen/zero"-->
+<!--                app:dotsColor="@color/gray81"-->
+<!--                app:dotsSize="10dp"-->
+<!--                app:dotsSpacing="5dp"-->
+<!--                app:dotsWidthFactor="2.5"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/homeSpecial2ViewPager"-->
+<!--                app:layout_constraintVertical_bias="0.5"-->
+<!--                app:progressMode="false"-->
+<!--                app:selectedDotColor="@color/accent" />-->
+
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/homeFreeClassesTv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_4"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:fontFamily="@font/bold"-->
+<!--                android:text="@string/free_classes"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                android:textSize="@dimen/textsize_20d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/homeSpecial2Indicator" />-->
+
+<!--            <ProgressBar-->
+<!--                android:id="@+id/homeFreeClassesProgressBar"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_16"-->
+<!--                android:layout_marginTop="@dimen/margin_16"-->
+<!--                android:layout_marginEnd="@dimen/margin_16"-->
+<!--                android:layout_marginBottom="@dimen/margin_16"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/homeFreeClassesRv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/homeFreeClassesRv" />-->
+
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/homeViewAllFreeClassesBtn"-->
+<!--                style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_8"-->
+<!--                android:layout_marginEnd="@dimen/margin_8"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:gravity="center"-->
+<!--                android:minWidth="0dp"-->
+<!--                android:minHeight="0dp"-->
+<!--                android:paddingStart="@dimen/margin_8"-->
+<!--                android:paddingTop="@dimen/margin_4"-->
+<!--                android:paddingEnd="@dimen/margin_8"-->
+<!--                android:paddingBottom="@dimen/margin_4"-->
+<!--                android:text="@string/view_all"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/text_color3"-->
+<!--                android:textSize="@dimen/textsize_14d"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeSpecial2Indicator"-->
+<!--                app:rippleColor="@color/rippleColor" />-->
+
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/homeFreeClassesRv"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/margin_4"-->
+<!--                android:minHeight="230dp"-->
+<!--                android:nestedScrollingEnabled="true"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/homeFreeClassesTv" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

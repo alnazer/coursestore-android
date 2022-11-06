@@ -5,6 +5,7 @@ import com.online.coursestore.manager.net.CustomCallback
 import com.online.coursestore.manager.net.RetryListener
 import com.online.coursestore.model.Course
 import com.online.coursestore.model.Data
+import com.online.coursestore.model.SoonCourse
 import com.online.coursestore.presenter.Presenter
 import com.online.coursestore.ui.frag.HomeFrag
 import retrofit2.Call
@@ -69,7 +70,7 @@ class HomePresenterImpl(private val frag: HomeFrag) : Presenter.HomePresenter {
                 response: Response<Data<List<Course>>>
             ) {
                 if (response.body() != null) {
-                    frag.onBestRatedCoursesRecevied(response.body()!!)
+//                    frag.onBestRatedCoursesRecevied(response.body()!!)
                 }
             }
         })
@@ -90,7 +91,49 @@ class HomePresenterImpl(private val frag: HomeFrag) : Presenter.HomePresenter {
                 response: Response<Data<List<Course>>>
             ) {
                 if (response.body() != null) {
-                    frag.onBestSellersCoursesRecevied(response.body()!!)
+//                    frag.onBestSellersCoursesRecevied(response.body()!!)
+                }
+            }
+        })
+    }
+
+    override fun getAllCourses(map: HashMap<String, String>) {
+        val courses = ApiService.apiClient!!.getCourses(map)
+        frag.addNetworkRequest(courses)
+        courses.enqueue(object : CustomCallback<Data<List<Course>>> {
+            override fun onStateChanged(): RetryListener? {
+                return RetryListener {
+                    getAllCourses(map)
+                }
+            }
+
+            override fun onResponse(
+                call: Call<Data<List<Course>>>,
+                response: Response<Data<List<Course>>>
+            ) {
+                if (response.body() != null) {
+                    frag.onAllCoursesRecevied(response.body()!!)
+                }
+            }
+        })
+    }
+
+    override fun getSoonCourses() {
+        val courses = ApiService.apiClient!!.getSoonCourses()
+        frag.addNetworkRequest(courses)
+        courses.enqueue(object : CustomCallback<Data<List<SoonCourse>>> {
+            override fun onStateChanged(): RetryListener? {
+                return RetryListener {
+                    getSoonCourses()
+                }
+            }
+
+            override fun onResponse(
+                call: Call<Data<List<SoonCourse>>>,
+                response: Response<Data<List<SoonCourse>>>
+            ) {
+                if (response.body() != null) {
+                    frag.onSoonCoursesRecevied(response.body()!!)
                 }
             }
         })
@@ -111,7 +154,7 @@ class HomePresenterImpl(private val frag: HomeFrag) : Presenter.HomePresenter {
                 response: Response<Data<List<Course>>>
             ) {
                 if (response.body() != null) {
-                    frag.onDiscountedCoursesRecevied(response.body()!!)
+//                    frag.onDiscountedCoursesRecevied(response.body()!!)
                 }
             }
         })
@@ -132,7 +175,7 @@ class HomePresenterImpl(private val frag: HomeFrag) : Presenter.HomePresenter {
                 response: Response<Data<List<Course>>>
             ) {
                 if (response.body() != null) {
-                    frag.onFreeCoursesRecevied(response.body()!!)
+//                    frag.onFreeCoursesRecevied(response.body()!!)
                 }
             }
         })

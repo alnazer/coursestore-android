@@ -66,11 +66,13 @@
     <string name="financial">الأمور المالية</string>
     <string name="support">الدعم</string>
     <string name="subscription">الاشتراك</string>
-    <string name="featured_classes">الكورسات المميزة</string>
+    <string name="featured_classes">الكورسات الرائجة</string>
     <string name="newest_classes">أحدث الكورسات</string>
     <string name="view_all">مشاهدة الكل</string>
     <string name="best_rated">أفضل تصنيف</string>
     <string name="best_selling">أفضل مبيعًا</string>
+    <string name="all_courses">كل الكورسات</string>
+    <string name="soon_courses">قريبا</string>
     <string name="discounted_classes">الكورسات المخفضة</string>
     <string name="free_classes">كورسات مجانية</string>
     <string name="save">حفظ</string>
