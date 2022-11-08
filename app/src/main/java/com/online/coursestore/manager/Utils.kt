@@ -188,6 +188,18 @@ object Utils {
             displayMetrics.widthPixels
         }
     }
+    fun getScreenHeight(windowManager: WindowManager): Int {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = windowManager.currentWindowMetrics
+            val insets = windowMetrics.windowInsets
+                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+            windowMetrics.bounds.height() - insets.top - insets.bottom
+        } else {
+            val displayMetrics = DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.heightPixels
+        }
+    }
 
     fun getWindowInsets(window: Window) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

@@ -31,6 +31,7 @@ import com.online.coursestore.manager.adapter.DasboardGeneralSliderAdapter
 import com.online.coursestore.manager.adapter.NoticeBoardSliderAdapter
 import com.online.coursestore.manager.adapter.TopDashboardRvAdapter
 import com.online.coursestore.manager.listener.ItemCallback
+import com.online.coursestore.manager.listener.TopRvClickListener
 import com.online.coursestore.model.CommonItem
 import com.online.coursestore.model.MenuItem
 import com.online.coursestore.model.QuickInfo
@@ -40,7 +41,7 @@ import com.online.coursestore.ui.MainActivity
 import com.online.coursestore.ui.widget.CustomXAxisRenderer
 import com.online.coursestore.ui.widget.LoadingDialog
 
-class DashboardFrag : Fragment(), ItemCallback<QuickInfo>, View.OnClickListener {
+class DashboardFrag : Fragment(), ItemCallback<QuickInfo>, View.OnClickListener, TopRvClickListener {
 
     private lateinit var mBinding: FragDashboardBinding
     private lateinit var mLoadingDialog: LoadingDialog
@@ -394,7 +395,7 @@ class DashboardFrag : Fragment(), ItemCallback<QuickInfo>, View.OnClickListener 
         })
         mBinding.dashboardStatisticsRv.layoutManager =
             LinearLayoutManager(requireContext(), HORIZONTAL, false)
-        mBinding.dashboardStatisticsRv.adapter = TopDashboardRvAdapter(items)
+        mBinding.dashboardStatisticsRv.adapter = TopDashboardRvAdapter(items, this)
 
 
     }
@@ -491,7 +492,7 @@ class DashboardFrag : Fragment(), ItemCallback<QuickInfo>, View.OnClickListener 
 
         mBinding.dashboardStatisticsRv.layoutManager =
             LinearLayoutManager(requireContext(), HORIZONTAL, false)
-        mBinding.dashboardStatisticsRv.adapter = TopDashboardRvAdapter(items)
+        mBinding.dashboardStatisticsRv.adapter = TopDashboardRvAdapter(items, this)
     }
 
     class CustomMarkerView(context: Context) :
@@ -557,6 +558,23 @@ class DashboardFrag : Fragment(), ItemCallback<QuickInfo>, View.OnClickListener 
 
             R.id.dashboardHeaderCartBtn -> {
                 (activity as MainActivity).transact(CartFrag())
+            }
+        }
+    }
+
+    override fun onItemClick(position: Int) {
+        when (position) {
+            0 -> {
+                (requireActivity() as MainActivity).transact(MyClassesTabFrag())
+            }
+            1 -> {
+                (requireActivity() as MainActivity).transact(SupportTabFrag())
+            }
+            2 -> {
+                (requireActivity() as MainActivity).transact(MeetingsTabFrag())
+            }
+            3 -> {
+                (requireActivity() as MainActivity).transact(CommentsFrag())
             }
         }
     }

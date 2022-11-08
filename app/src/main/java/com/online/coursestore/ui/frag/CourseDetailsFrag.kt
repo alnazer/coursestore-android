@@ -1,6 +1,7 @@
 package com.online.coursestore.ui.frag
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Outline
 import android.graphics.Paint
 import android.graphics.Rect
@@ -11,11 +12,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
+import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.WorkerThread
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import androidx.core.view.marginTop
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -98,6 +103,41 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         COMMENT,
         REVIEW,
         HIDE
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mBinding.courseDetailsPurchaseBtnsContainer.visibility = View.GONE
+            (activity as MainActivity).hideToolbar()
+            mBinding.courseDetailsRatingCountTv.visibility = View.GONE
+            mBinding.courseDetailsRatingBar.visibility = View.GONE
+            mBinding.courseDetailsTitleTv.visibility = View.GONE
+            mBinding.courseDetailsCategoryTv.visibility = View.GONE
+            mBinding.courseDetailsInTv.visibility = View.GONE
+            mBinding.courseDetailsCollapsingLayout.setPadding(0,0,0,0)
+            mBinding.courseDetailsCollapsingLayout.requestLayout()
+            var params = mBinding.courseDetailsCoordinatorLayout.layoutParams as ConstraintLayout.LayoutParams
+            params.topMargin = 0
+            mBinding.courseDetailsCoordinatorLayout.layoutParams = params
+            val ratio = Utils.getScreenWidth(requireActivity().windowManager)/Utils.getScreenHeight(requireActivity().windowManager).toFloat()
+            playerFragment.setAspectRatio(ratio)
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mBinding.courseDetailsPurchaseBtnsContainer.visibility = View.VISIBLE
+            showToolbar()
+            mBinding.courseDetailsRatingCountTv.visibility = View.VISIBLE
+            mBinding.courseDetailsRatingBar.visibility = View.VISIBLE
+            mBinding.courseDetailsTitleTv.visibility = View.VISIBLE
+            mBinding.courseDetailsCategoryTv.visibility = View.VISIBLE
+            mBinding.courseDetailsInTv.visibility = View.VISIBLE
+            val padding = Utils.changeDpToPx(requireContext(),16f).toInt()
+            mBinding.courseDetailsCollapsingLayout.setPadding(padding,0,padding,padding)
+            mBinding.courseDetailsCollapsingLayout.requestLayout()
+            var params = mBinding.courseDetailsCoordinatorLayout.layoutParams as ConstraintLayout.LayoutParams
+            params.topMargin = Utils.changeDpToPx(requireContext(), 8f).toInt()
+            mBinding.courseDetailsCoordinatorLayout.layoutParams = params
+            playerFragment.setAspectRatio(16f/9f)
+        }
     }
 
     private val mAddToCartCallback = object : ItemCallback<BaseResponse> {
@@ -185,14 +225,18 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         mLoadingDialog.dismiss()
     }
 
-    private fun init() {
-        mPresenter = CourseDetailsPresenterImpl(this)
-
+    fun showToolbar(){
         val toolbarOptions = ToolbarOptions()
         toolbarOptions.startIcon = ToolbarOptions.Icon.BACK
         toolbarOptions.endIcon = ToolbarOptions.Icon.CART
 
         (activity as MainActivity).showToolbar(toolbarOptions, R.string.course_details)
+    }
+
+    private fun init() {
+        mPresenter = CourseDetailsPresenterImpl(this)
+
+        showToolbar()
 
         initAppBarLayout()
         initBottomSheet()

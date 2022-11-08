@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.onesignal.OneSignal
 import com.online.coursestore.BuildConfig
 import com.online.coursestore.R
 import com.online.coursestore.manager.db.AppDb
@@ -32,6 +33,7 @@ class App : Application() {
         const val MY_FATOORAH_API_KEY_TEST = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL"
         const val PAYPAL_CLIENT_ID_LIVE = "AfQhBM1_cU33-2jbs93wW3Kyl0H9Bydk7XpdXEBihTXPJzsRuwO2VQ9OEwi0mmLJutDZUJfT3t0nqHNI"
         const val PAYPAL_CLIENT_ID_SANDBOX   = "AUOyTa5-7H18jcuy5G1OKPUbJ4c0xLh02wEq436O9Z9w1_M-usliUuizqTKQSTJ32jn0DRoJnwlwGeiZ"
+        const val ONESIGNAL_APP_ID   = "8b6ed273-a676-4004-a9a4-3e3e198159d5"
         const val VISA_MASTER = "Visa/Master"
         const val PAYPAL = "Paypal"
         const val SAUDI_CREDIT_CARD = "Saudi Credit Card"
@@ -248,5 +250,11 @@ class App : Application() {
             )
         )
         PayPalCheckout.setConfig(config)
+
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
+        OneSignal.promptForPushNotifications();
+        
     }
 }

@@ -13,6 +13,7 @@ import com.online.coursestore.manager.ToastMaker
 import com.online.coursestore.manager.Utils
 import com.online.coursestore.manager.adapter.SaasPackageAdapter
 import com.online.coursestore.manager.adapter.TopDashboardRvAdapter
+import com.online.coursestore.manager.listener.TopRvClickListener
 import com.online.coursestore.manager.net.observer.NetworkObserverFragment
 import com.online.coursestore.model.*
 import com.online.coursestore.model.view.PaymentRedirection
@@ -23,7 +24,7 @@ import com.online.coursestore.ui.PaymentStatusActivity
 import com.online.coursestore.ui.frag.abstract.EmptyState
 import com.online.coursestore.ui.widget.LoadingDialog
 
-class SaasPackageFrag : NetworkObserverFragment(), EmptyState {
+class SaasPackageFrag : NetworkObserverFragment(), EmptyState , TopRvClickListener{
 
     private lateinit var mBinding: FragSaasPackageBinding
     private lateinit var mPresenter: Presenter.SaasPackagePresenter
@@ -239,7 +240,7 @@ class SaasPackageFrag : NetworkObserverFragment(), EmptyState {
             })
         }
 
-        mBinding.saasPackageAccountStatisticsRv.adapter = TopDashboardRvAdapter(items)
+        mBinding.saasPackageAccountStatisticsRv.adapter = TopDashboardRvAdapter(items, this)
     }
 
     fun onItemSelected(saasPackageItem: SaasPackageItem) {
@@ -249,5 +250,22 @@ class SaasPackageFrag : NetworkObserverFragment(), EmptyState {
         saasPackageItem.packageId = saasPackageItem.id
 
         mPresenter.checkoutSubscription(saasPackageItem)
+    }
+
+    override fun onItemClick(position: Int) {
+        when (position) {
+            0 -> {
+                (requireActivity() as MainActivity).transact(MyClassesTabFrag())
+            }
+            1 -> {
+                (requireActivity() as MainActivity).transact(SupportTabFrag())
+            }
+            2 -> {
+                (requireActivity() as MainActivity).transact(MeetingsTabFrag())
+            }
+            3 -> {
+                (requireActivity() as MainActivity).transact(CommentsFrag())
+            }
+        }
     }
 }
