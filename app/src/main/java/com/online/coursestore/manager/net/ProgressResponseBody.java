@@ -1,15 +1,21 @@
 package com.online.coursestore.manager.net;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+
+import com.online.coursestore.manager.Utils;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
+import okhttp3.internal.Util;
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.ForwardingSource;
@@ -78,9 +84,9 @@ public class ProgressResponseBody extends ResponseBody {
                 float percent = bytesRead == -1 ? 100f : (((float) totalBytesRead / (float) responseBody.contentLength()) * 100);
 
                 if (progressListener != null) {
-                    percent = Float.parseFloat(String.format("%.3f", percent));
-                    percent = Float.parseFloat(String.format("%.2f", percent));
-                    percent = Float.parseFloat(String.format("%.1f", percent));
+                    percent = Float.parseFloat(String.format(Locale.US,"%.3f", percent));
+                    percent = Float.parseFloat(String.format(Locale.US,"%.2f", percent));
+                    percent = Float.parseFloat(String.format(Locale.US,"%.1f", percent));
                     progressListener.onAttachmentDownloadUpdate(percent, id);
                 }
 

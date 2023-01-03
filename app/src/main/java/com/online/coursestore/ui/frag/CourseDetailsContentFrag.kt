@@ -53,7 +53,11 @@ class CourseDetailsContentFrag : NetworkObserverFragment(), ChapterClickListener
         if (!course.hasUserBought) {
             initBottomPadding()
         }
-
+        if (requireArguments().containsKey("viewPager")){
+            if (requireArguments().getBoolean("viewPager")){
+                mBinding.root.rotationY = 180f
+            }
+        }
         mBinding.rvNestedProgressBar.visibility = View.GONE
 
         val chapters = ArrayList<Chapter>()

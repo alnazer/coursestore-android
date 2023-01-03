@@ -49,7 +49,11 @@ class CourseDetailsCommentsFrag : Fragment(), EmptyState {
 
     private fun init() {
         initBottomPadding()
-
+        if (requireArguments().containsKey("viewPager")){
+            if (requireArguments().getBoolean("viewPager")){
+                mBinding.root.rotationY = 180f
+            }
+        }
         val course = requireArguments().getParcelable<Course>(App.COURSE)!!
         mBinding.rvNestedProgressBar.visibility = View.GONE
         mBinding.rvNestedRv.layoutManager = LinearLayoutManager(requireContext())

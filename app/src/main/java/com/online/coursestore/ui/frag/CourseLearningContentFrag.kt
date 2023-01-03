@@ -6,15 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.online.coursestore.R
 import com.online.coursestore.databinding.RvBinding
 import com.online.coursestore.manager.App
+import com.online.coursestore.manager.ToastMaker
 import com.online.coursestore.manager.adapter.ChaptersContentAdapter
+import com.online.coursestore.manager.listener.ChapterClickListener
 import com.online.coursestore.model.*
 import com.online.coursestore.model.view.ChapterView
 import java.util.ArrayList
 
-class CourseLearningContentFrag : Fragment() {
+class CourseLearningContentFrag : Fragment(), ChapterClickListener {
     private lateinit var mBinding: RvBinding
 
     override fun onCreateView(
@@ -77,6 +80,11 @@ class CourseLearningContentFrag : Fragment() {
 
         mBinding.rvProgressBar.visibility = View.GONE
         mBinding.rv.layoutManager = LinearLayoutManager(requireContext())
-        mBinding.rv.adapter = ChaptersContentAdapter(items, course, requireActivity(), offlineMode)
+        mBinding.rv.adapter = ChaptersContentAdapter(items, course, requireActivity(), offlineMode,this)
     }
+
+    override fun onClick(chapterFileItem: ChapterFileItem) {
+        (parentFragment as CourseLearningTabsFrag).handleLoadVideo(chapterFileItem)
+    }
+
 }

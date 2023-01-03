@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16"
         android:layout_marginTop="@dimen/margin_10"
         android:layout_marginEnd="@dimen/margin_16"
@@ -24,13 +24,14 @@
 
             <com.online.coursestore.ui.widget.RoundishImageView
                 android:id="@+id/itemCertificateImg"
-                android:layout_width="130dp"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginBottom="@dimen/margin_8"
-                app:cornerRadius="@dimen/card_corner_radius_15"
                 android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:cornerRadius="@dimen/card_corner_radius_15"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -51,7 +52,8 @@
                 app:layout_constrainedWidth="true"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/itemCertificateImg"
-                app:layout_constraintTop_toTopOf="@id/itemCertificateImg"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="SpUsage" />
 
 
@@ -60,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:ellipsize="end"
                 android:fontFamily="@font/regular"
@@ -67,10 +70,9 @@
                 android:textColor="@color/text_color3"
                 android:textSize="@dimen/textsize_11d"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toBottomOf="@+id/itemCertificateImg"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/itemCertificateImg"
-                app:layout_constraintTop_toTopOf="@id/itemCertificateImg"
+                app:layout_constraintTop_toBottomOf="@id/itemCertificateTitleTv"
                 tools:ignore="SpUsage" />
 
 
@@ -79,9 +81,10 @@
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginBottom="@dimen/margin_8"
-                app:layout_constraintBottom_toBottomOf="@id/itemCertificateImg"
                 app:layout_constraintStart_toEndOf="@+id/itemCertificateImg"
+                app:layout_constraintTop_toBottomOf="@id/itemCertificateDescTv"
                 app:srcCompat="@drawable/ic_calendar" />
 
             <com.google.android.material.textview.MaterialTextView

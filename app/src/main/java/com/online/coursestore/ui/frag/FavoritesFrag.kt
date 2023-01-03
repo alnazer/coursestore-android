@@ -41,12 +41,12 @@ class FavoritesFrag : NetworkObserverFragment(), EmptyState {
     }
 
     private fun init() {
-        mBinding.rvContainer.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                android.R.color.transparent
-            )
-        )
+//        mBinding.rvContainer.setBackgroundColor(
+//            ContextCompat.getColor(
+//                requireContext(),
+//                android.R.color.transparent
+//            )
+//        )
         mBinding.rvEmptyState.root.visibility = View.INVISIBLE
 
         val toolbarOptions = ToolbarOptions()

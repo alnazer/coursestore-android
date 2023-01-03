@@ -242,7 +242,7 @@ interface ApiClient {
     ): Call<BaseResponse>
 
     @GET("panel/financial/summary")
-    fun getFinancialSummary(): Call<Data<Count<FinancialSummary>>>
+    fun getFinancialSummary(@QueryMap map: Map<String, String>): Call<Data<Count<FinancialSummary>>>
 
     @GET("panel/quick-info")
     fun getQuickInfo(): Call<QuickInfo>
@@ -294,6 +294,14 @@ interface ApiClient {
     @Headers("Content-Type: application/json")
     @POST("panel/cart/web_checkout")
     fun checkout(@Body coupon: Coupon?): Call<Data<Response>>
+
+    @Headers("Content-Type: application/json")
+    @POST("panel/cart/checkout")
+    fun checkout(@Body checkout: Checkout): Call<Data<CheckoutResponse>>
+
+    @Headers("Content-Type: application/json")
+    @POST("panel/payments/direct_verify")
+    fun verifyPayment(@Body verifyPayment: VerifyPayment): Call<Data<VerifyPaymentResponse>>
 
     @Headers("Content-Type: application/json")
     @POST("users/{user_id}/send-message")

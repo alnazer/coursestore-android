@@ -18,4 +18,10 @@ class Amounts {
 
     @SerializedName("total")
     var total = 0.0
+
+    @SerializedName("total_usd")
+    var total_usd = 0.0
+
+    @SerializedName("total_kd")
+    var total_kd = 0.0
 }

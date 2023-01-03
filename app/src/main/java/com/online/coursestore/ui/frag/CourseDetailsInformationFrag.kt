@@ -42,7 +42,11 @@ class CourseDetailsInformationFrag : Fragment(), View.OnClickListener {
     private fun init() {
         val course = requireArguments().getParcelable<Course>(App.COURSE)!!
         val offlineMode = requireArguments().getBoolean(App.OFFLINE)
-
+        if (requireArguments().containsKey("viewPager")){
+            if (requireArguments().getBoolean("viewPager")){
+                mBinding.root.rotationY = 180f
+            }
+        }
         initMarkInfos(course)
         initDescription(course)
 
@@ -159,8 +163,8 @@ class CourseDetailsInformationFrag : Fragment(), View.OnClickListener {
 
     private fun initMarkInfos(course: Course) {
         mBinding.courseDetailsInformationStudentMarkTv.text = course.studentsCount.toString()
-        mBinding.courseDetailsInformationChaptersCountMarkTv.text =
-            (course.sessionChapters.size + course.filesChapters.size + course.textLessonChapters.size).toString()
+        mBinding.courseDetailsInformationChaptersCountMarkTv.text = course.videos_count.toString()
+//            (course.sessionChapters.size + course.filesChapters.size + course.textLessonChapters.size).toString()
 
         if (course.isLive()) {
             mBinding.courseDetailsInformationLiveClassMarkImg.visibility = View.VISIBLE

@@ -1,6 +1,7 @@
 package com.online.coursestore.ui.frag
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,12 @@ class ProfileAboutFrag : Fragment(), EmptyState, MainActivity.OnRefreshListener 
         mUserProfile = requireArguments().getParcelable(App.USER)!!
 
         if (mUserProfile.bio != null) {
-            mBinding.profileAboutBioTv.text = Utils.getTextAsHtml(mUserProfile.bio!!)
+            if (mUserProfile.about != null){
+                mBinding.profileAboutBioTv.text = Utils.getTextAsHtml(mUserProfile.bio!!)
+                mBinding.profileAboutBioTv.text = mBinding.profileAboutBioTv.text.toString() + "\n\n" + Utils.getTextAsHtml(mUserProfile.about!!)
+            }else{
+                mBinding.profileAboutBioTv.text = Utils.getTextAsHtml(mUserProfile.bio!!)
+            }
         }
 
         if (mUserProfile.offline.toBoolean() && !mUserProfile.offlineMessage.isNullOrEmpty()) {

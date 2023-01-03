@@ -12,4 +12,7 @@ class Coupon {
 
     @SerializedName("coupon")
     var coupon: String? = null
+
+    @SerializedName("webinar_id")
+    var webinarId : Int? = 0
 }

@@ -26,7 +26,20 @@ class UsersOrganizationGridAdapter(items: List<User>) :
         if (item.avatar != null)
             Glide.with(holder.itemView.context).load(item.avatar).into(holder.binding.itemUserImg)
         holder.binding.itemUserNameTv.text = item.name
-        holder.binding.itemUserRoleTv.text = item.roleName
+        when (item.roleName) {
+            "teacher" -> {
+                holder.binding.itemUserRoleTv.text = "مدرب"
+            }
+            "organization" -> {
+                holder.binding.itemUserRoleTv.text = "منظمة"
+            }
+            "user" -> {
+                holder.binding.itemUserRoleTv.text = "مستخدم"
+            }
+            else -> {
+                holder.binding.itemUserRoleTv.text = item.roleName
+            }
+        }
         holder.binding.itemUserRatingBar.rating = item.rating
 
         when (item?.meetingStatus) {

@@ -81,8 +81,7 @@ class QuizReviewFrag : Fragment(), View.OnClickListener {
         mIsInstructorReview = requireArguments().getBoolean(App.INSTRUCTOR_TYPE, false)
 
         mQuiz = mResult.quiz
-        mQuestions = mResult.quiz.questions
-        Log.d("quiz", mResult.quiz.questions.size.toString())
+        mQuestions = mQuiz.questions
         mCurrentQuestion = mQuestions[0]
 
         mUserQuizAnswerMap = HashMap()

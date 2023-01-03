@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,9 +96,9 @@ class CertificateDetailsFrag : NetworkObserverFragment(), View.OnClickListener {
 
                 initResultCertMarks()
 
-                if (!mQuiz.authCanDownloadCertificate) {
-                    mBinding.certificateDetailsBtnsContainer.visibility = View.GONE
-                }
+//                if (!mQuiz.authCanDownloadCertificate) {
+//                    mBinding.certificateDetailsBtnsContainer.visibility = View.GONE
+//                }
 
                 if (!App.loggedInUser!!.isUser()) {
                     mPresenter.getStudents()
@@ -144,7 +145,7 @@ class CertificateDetailsFrag : NetworkObserverFragment(), View.OnClickListener {
             }
         }
 
-
+        mBinding.certificateDetailsImg.visibility = View.GONE
         mBinding.certificateDetailsTitleTv.text = mQuiz.title
         mBinding.certificateDetailsDescTv.text = mQuiz.course.title
 
@@ -252,15 +253,17 @@ class CertificateDetailsFrag : NetworkObserverFragment(), View.OnClickListener {
 
     private fun downloadCert(toDownloads: Boolean) {
         val bundle = Bundle()
-        if (mResult!!.certificate == null) {
-            bundle.putString(
-                App.URL,
-                BuildVars.CERT_DOWNLOAD_URL.replace("{}", mResult!!.id.toString())
-            )
-            bundle.putBoolean(App.FILE_NAME_FROM_HEADER, true)
-        } else {
-            bundle.putString(App.URL, mResult!!.certificate!!.img)
-        }
+//        if (mResult!!.certificate == null) {
+//
+//        } else {
+//            bundle.putString(App.URL, mResult!!.certificate!!.img)
+//        }
+        bundle.putString(
+            App.URL,
+            BuildVars.CERT_DOWNLOAD_URL.replace("{}", mResult!!.id.toString())
+        )
+        Log.d("cetificateDownloadLink", BuildVars.CERT_DOWNLOAD_URL.replace("{}", mResult!!.id.toString()))
+        bundle.putBoolean(App.FILE_NAME_FROM_HEADER, true)
 
         bundle.putString(App.DIR, App.Companion.Directory.CERTIFICATE.value())
         bundle.putBoolean(App.TO_DOWNLOADS, toDownloads)

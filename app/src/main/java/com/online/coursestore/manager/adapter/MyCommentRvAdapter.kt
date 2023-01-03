@@ -23,9 +23,9 @@ class MyCommentRvAdapter(comments: List<Comment>) :
 
     override fun onBindViewHolder(viewholder: ViewHolder, position: Int) {
         val comment = items[position]
-        viewholder.binding.itemMyCommentDateTimeTv.text =
-            Utils.getDateTimeFromTimestamp(comment.createdAt)
-
+//        viewholder.binding.itemMyCommentDateTimeTv.text =
+//            Utils.getDateTimeFromTimestamp(comment.createdAt)
+        viewholder.binding.itemMyCommentDateTimeTv.text = comment.createdAt
         val img: String?
 
         if (comment.blog != null) {

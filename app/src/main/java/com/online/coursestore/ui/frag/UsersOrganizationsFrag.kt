@@ -65,7 +65,11 @@ class UsersOrganizationsFrag : NetworkObserverFragment(), OnItemClickListener, E
         val users = requireArguments().getParcelableArrayList<User>(App.USERS)
         val type = requireArguments().getSerializable(App.SELECTION_TYPE)
         val nestedEnabled = requireArguments().getBoolean(App.NESTED_ENABLED)
-
+        if (requireArguments().containsKey("viewPager")){
+            if (requireArguments().getBoolean("viewPager")){
+                mBinding.root.rotationY = 180f
+            }
+        }
         if (nestedEnabled) {
             mBinding.rv.isNestedScrollingEnabled = true
         }

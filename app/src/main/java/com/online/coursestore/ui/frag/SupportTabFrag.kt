@@ -1,6 +1,7 @@
 package com.online.coursestore.ui.frag
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,12 +39,12 @@ class SupportTabFrag : NetworkObserverFragment() {
 
         (activity as MainActivity).showToolbar(toolbarOptions, R.string.support_messages)
 
-        mBinding.tabContainer.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                android.R.color.transparent
-            )
-        )
+//        mBinding.tabContainer.setBackgroundColor(
+//            ContextCompat.getColor(
+//                requireContext(),
+//                android.R.color.transparent
+//            )
+//        )
 
         initTabs()
     }

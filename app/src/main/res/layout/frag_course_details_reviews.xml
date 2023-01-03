@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
+                android:layout_marginStart="@dimen/margin_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_rating_tv"
@@ -67,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_4"
                 android:layout_marginTop="@dimen/margin_8"
                 android:background="@drawable/round_view_gray_corner10"
                 android:fontFamily="@font/regular"
@@ -80,134 +82,134 @@
                 tools:ignore="SpUsage" />
 
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/course_details_reviews_content_quality_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_10"
-                android:fontFamily="@font/regular"
-                android:text="@string/content_quality"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/textsize_11d"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_count_tv"
-                tools:ignore="SpUsage" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/course_details_reviews_content_quality_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_10"-->
+<!--                android:layout_marginTop="@dimen/margin_10"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:text="@string/content_quality"-->
+<!--                android:textColor="@color/text_color3"-->
+<!--                android:textSize="@dimen/textsize_11d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_count_tv"-->
+<!--                tools:ignore="SpUsage" />-->
 
-            <ProgressBar
-                android:id="@+id/course_details_reviews_content_quality_progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginEnd="@dimen/margin_10"
-                android:indeterminate="false"
-                android:max="5"
-                android:paddingStart="2dp"
-                android:paddingEnd="2dp"
-                android:progressDrawable="@drawable/progress_drawable_gold"
-                android:progressTint="@color/gold"
-                app:layout_constraintBottom_toBottomOf="@+id/course_details_reviews_content_quality_tv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/course_details_reviews_content_quality_tv"
-                app:layout_constraintTop_toTopOf="@+id/course_details_reviews_content_quality_tv" />
+<!--            <ProgressBar-->
+<!--                android:id="@+id/course_details_reviews_content_quality_progress_bar"-->
+<!--                style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="10dp"-->
+<!--                android:layout_marginStart="@dimen/margin_10"-->
+<!--                android:layout_marginEnd="@dimen/margin_10"-->
+<!--                android:indeterminate="false"-->
+<!--                android:max="5"-->
+<!--                android:paddingStart="2dp"-->
+<!--                android:paddingEnd="2dp"-->
+<!--                android:progressDrawable="@drawable/progress_drawable_gold"-->
+<!--                android:progressTint="@color/gold"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/course_details_reviews_content_quality_tv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/course_details_reviews_content_quality_tv"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/course_details_reviews_content_quality_tv" />-->
 
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/course_details_reviews_instructor_skills_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_10"
-                android:fontFamily="@font/regular"
-                android:text="@string/instructor_skills"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/textsize_11d"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_content_quality_tv"
-                tools:ignore="SpUsage" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/course_details_reviews_instructor_skills_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_10"-->
+<!--                android:layout_marginTop="@dimen/margin_10"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:text="@string/instructor_skills"-->
+<!--                android:textColor="@color/text_color3"-->
+<!--                android:textSize="@dimen/textsize_11d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_content_quality_tv"-->
+<!--                tools:ignore="SpUsage" />-->
 
-            <ProgressBar
-                android:id="@+id/course_details_reviews_instructor_skills_progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginEnd="@dimen/margin_10"
-                android:indeterminate="false"
-                android:max="5"
-                android:paddingStart="2dp"
-                android:paddingEnd="2dp"
-                android:progressDrawable="@drawable/progress_drawable_gold"
-                android:progressTint="@color/gold"
-                app:layout_constraintBottom_toBottomOf="@+id/course_details_reviews_instructor_skills_tv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/course_details_reviews_instructor_skills_tv"
-                app:layout_constraintTop_toTopOf="@+id/course_details_reviews_instructor_skills_tv" />
+<!--            <ProgressBar-->
+<!--                android:id="@+id/course_details_reviews_instructor_skills_progress_bar"-->
+<!--                style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="10dp"-->
+<!--                android:layout_marginStart="@dimen/margin_10"-->
+<!--                android:layout_marginEnd="@dimen/margin_10"-->
+<!--                android:indeterminate="false"-->
+<!--                android:max="5"-->
+<!--                android:paddingStart="2dp"-->
+<!--                android:paddingEnd="2dp"-->
+<!--                android:progressDrawable="@drawable/progress_drawable_gold"-->
+<!--                android:progressTint="@color/gold"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/course_details_reviews_instructor_skills_tv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/course_details_reviews_instructor_skills_tv"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/course_details_reviews_instructor_skills_tv" />-->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/course_details_reviews_purchase_worth_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_10"
-                android:fontFamily="@font/regular"
-                android:text="@string/purchase_worth"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/textsize_11d"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_instructor_skills_tv"
-                tools:ignore="SpUsage" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/course_details_reviews_purchase_worth_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_10"-->
+<!--                android:layout_marginTop="@dimen/margin_10"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:text="@string/purchase_worth"-->
+<!--                android:textColor="@color/text_color3"-->
+<!--                android:textSize="@dimen/textsize_11d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_instructor_skills_tv"-->
+<!--                tools:ignore="SpUsage" />-->
 
-            <ProgressBar
-                android:id="@+id/course_details_reviews_purchase_worth_progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginEnd="@dimen/margin_10"
-                android:indeterminate="false"
-                android:max="5"
-                android:paddingStart="2dp"
-                android:paddingEnd="2dp"
-                android:progressDrawable="@drawable/progress_drawable_gold"
-                android:progressTint="@color/gold"
-                app:layout_constraintBottom_toBottomOf="@+id/course_details_reviews_purchase_worth_tv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/course_details_reviews_purchase_worth_tv"
-                app:layout_constraintTop_toTopOf="@+id/course_details_reviews_purchase_worth_tv" />
+<!--            <ProgressBar-->
+<!--                android:id="@+id/course_details_reviews_purchase_worth_progress_bar"-->
+<!--                style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="10dp"-->
+<!--                android:layout_marginStart="@dimen/margin_10"-->
+<!--                android:layout_marginEnd="@dimen/margin_10"-->
+<!--                android:indeterminate="false"-->
+<!--                android:max="5"-->
+<!--                android:paddingStart="2dp"-->
+<!--                android:paddingEnd="2dp"-->
+<!--                android:progressDrawable="@drawable/progress_drawable_gold"-->
+<!--                android:progressTint="@color/gold"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/course_details_reviews_purchase_worth_tv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/course_details_reviews_purchase_worth_tv"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/course_details_reviews_purchase_worth_tv" />-->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/course_details_reviews_support_quality_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_10"
-                android:fontFamily="@font/regular"
-                android:text="@string/support_quality"
-                android:textColor="@color/text_color3"
-                android:textSize="@dimen/textsize_11d"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_purchase_worth_tv"
-                tools:ignore="SpUsage" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/course_details_reviews_support_quality_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_10"-->
+<!--                android:layout_marginTop="@dimen/margin_10"-->
+<!--                android:fontFamily="@font/regular"-->
+<!--                android:text="@string/support_quality"-->
+<!--                android:textColor="@color/text_color3"-->
+<!--                android:textSize="@dimen/textsize_11d"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/course_details_reviews_purchase_worth_tv"-->
+<!--                tools:ignore="SpUsage" />-->
 
-            <ProgressBar
-                android:id="@+id/course_details_reviews_support_quality_progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginEnd="@dimen/margin_10"
-                android:indeterminate="false"
-                android:max="5"
-                android:paddingStart="2dp"
-                android:paddingEnd="2dp"
-                android:progressDrawable="@drawable/progress_drawable_gold"
-                android:progressTint="@color/gold"
-                app:layout_constraintBottom_toBottomOf="@+id/course_details_reviews_support_quality_tv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/course_details_reviews_support_quality_tv"
-                app:layout_constraintTop_toTopOf="@+id/course_details_reviews_support_quality_tv" />
+<!--            <ProgressBar-->
+<!--                android:id="@+id/course_details_reviews_support_quality_progress_bar"-->
+<!--                style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="10dp"-->
+<!--                android:layout_marginStart="@dimen/margin_10"-->
+<!--                android:layout_marginEnd="@dimen/margin_10"-->
+<!--                android:indeterminate="false"-->
+<!--                android:max="5"-->
+<!--                android:paddingStart="2dp"-->
+<!--                android:paddingEnd="2dp"-->
+<!--                android:progressDrawable="@drawable/progress_drawable_gold"-->
+<!--                android:progressTint="@color/gold"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/course_details_reviews_support_quality_tv"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/course_details_reviews_support_quality_tv"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/course_details_reviews_support_quality_tv" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@ import com.online.coursestore.model.*
 import com.online.coursestore.presenter.Presenter
 import com.online.coursestore.presenterImpl.CouponPresenterImpl
 
-class CouponDialog : NetworkObserverBottomSheetDialog(), View.OnClickListener {
+class CouponDialog(var courseID: Int?) : NetworkObserverBottomSheetDialog(), View.OnClickListener {
 
     private lateinit var mBinding: DialogCouponBinding
     private lateinit var mPresenter: Presenter.CouponPresenter
@@ -75,6 +75,9 @@ class CouponDialog : NetworkObserverBottomSheetDialog(), View.OnClickListener {
                 val coupon = mBinding.couponEdtx.text.toString()
                 val couponObj = Coupon()
                 couponObj.coupon = coupon
+                if (courseID != null){
+                    couponObj.webinarId = courseID
+                }
                 mPresenter.validateCoupon(couponObj)
             }
         }

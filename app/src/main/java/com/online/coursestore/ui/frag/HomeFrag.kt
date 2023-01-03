@@ -2,6 +2,7 @@ package com.online.coursestore.ui.frag
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.online.coursestore.R
 import com.online.coursestore.databinding.FragHomeBinding
 import com.online.coursestore.manager.App
@@ -178,6 +180,7 @@ class HomeFrag : NetworkObserverFragment(), ViewTreeObserver.OnScrollChangedList
         map["sort"] = "newest"
         map["offset"] = OFFSET.toString()
         map["limit"] = LIMIT.toString()
+        map["type"] = "course"
         mBinding.homeNewestClasseRv.tag = map
         mPresenter.getNewestCourses(map)
 

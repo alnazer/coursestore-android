@@ -30,8 +30,9 @@ class ClassCommentRvAdapter(comments: List<Comment>) :
         }
 
         viewholder.binding.itemClassCommentNameTv.text = comment.user?.name
-        viewholder.binding.itemClassCommentDateTv.text =
-            Utils.getDateFromTimestamp(comment.createdAt)
+//        viewholder.binding.itemClassCommentDateTv.text =
+//            Utils.getDateFromTimestamp(comment.createdAt)
+        viewholder.binding.itemClassCommentDateTv.text = comment.createdAt
         if (comment.blog != null) {
             viewholder.binding.itemClassCommentTitleTv.text = comment.blog!!.title
         } else {

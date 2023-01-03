@@ -34,12 +34,12 @@ class CommentsFrag : Fragment() {
     }
 
     private fun init() {
-        mBinding.tabContainer.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                android.R.color.transparent
-            )
-        )
+//        mBinding.tabContainer.setBackgroundColor(
+//            ContextCompat.getColor(
+//                requireContext(),
+//                android.R.color.transparent
+//            )
+//        )
         val toolbarOptions = ToolbarOptions()
         toolbarOptions.startIcon = ToolbarOptions.Icon.NAV
         toolbarOptions.endIcon = ToolbarOptions.Icon.BACK

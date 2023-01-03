@@ -47,7 +47,7 @@ class ChapterItemRvAdapter(
         viewHolder.binding.itemCourseCommonImg.setImageResource(item.imgResource(context))
         viewHolder.binding.itemCourseCommonImg.setBackgroundResource(item.imgBgResource(context))
         viewHolder.binding.itemCourseCommonTitleTv.text = item.title(context)
-        viewHolder.binding.itemCourseCommonDescTv.text = item.desc(context)
+//        viewHolder.binding.itemCourseCommonDescTv.text = item.desc(context)
     }
 
     inner class ViewHolder(val binding: ItemCourseCommonBinding) :

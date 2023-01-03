@@ -1,9 +1,15 @@
 package com.online.coursestore.ui.frag.abstract
 
+import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
+import com.airbnb.lottie.utils.Utils
 import com.online.coursestore.R
 import com.online.coursestore.databinding.EmptyStateBinding
 import com.online.coursestore.ui.MainActivity
@@ -47,6 +53,7 @@ interface EmptyState {
         view.emptyStatetitleTv.text = context.getString(titleRes)
         view.emptyStateDescTV.text = context.getString(descRes)
     }
+
 
     fun showEmptyState(
         @DrawableRes img: Int,

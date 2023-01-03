@@ -9,4 +9,5 @@ class Currency {
 
     @SerializedName("sign")
     lateinit var sign: String
+
 }

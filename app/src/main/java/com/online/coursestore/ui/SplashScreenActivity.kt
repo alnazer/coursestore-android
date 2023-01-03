@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowInsets
@@ -27,6 +28,7 @@ import com.online.coursestore.manager.net.ApiService
 import com.online.coursestore.manager.net.RetryListener
 import com.online.coursestore.manager.net.observer.NetworkObserverActivity
 import com.online.coursestore.model.Language
+import com.online.coursestore.model.UserProfile
 import com.online.coursestore.presenter.Presenter
 import com.online.coursestore.presenterImpl.SplashScreenPresenterImpl
 import com.online.coursestore.ui.frag.ErrorFrag
@@ -104,7 +106,14 @@ class SplashScreenActivity : NetworkObserverActivity(), View.OnClickListener {
     private fun checkIfUserLoggedIn() {
         val appDb = AppDb(this)
         val token = appDb.getData(AppDb.DataType.TOKEN)
-
+        Log.d("token",token.toString())
+        if(token != null){
+            ApiService.createAuthorizedApiService(this, token)
+        }
+        val user = appDb.getData(AppDb.DataType.USER)
+        if (user != null){
+            App.loggedInUser = Gson().fromJson(user, UserProfile::class.java)
+        }
         val prefManager = PrefManager(this)
 
         val activity =

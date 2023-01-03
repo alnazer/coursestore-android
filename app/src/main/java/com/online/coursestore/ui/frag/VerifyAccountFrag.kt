@@ -63,6 +63,7 @@ class VerifyAccountFrag : NetworkObserverFragment(), View.OnClickListener {
         addTextWatcherForLastEdtx()
         mBinding.verifyAccountResendBtn.setOnClickListener(this)
         mBinding.verifyAccountBtn.setOnClickListener(this)
+        mBinding.verifyAccountSkipBtn.setOnClickListener(this)
         mBinding.verificationCodeFirstEdtx.requestFocus()
     }
 
@@ -169,6 +170,13 @@ class VerifyAccountFrag : NetworkObserverFragment(), View.OnClickListener {
 
                     mPresenter.verifyAccount(accountVerification)
                 }
+            }
+            R.id.verifyAccountSkipBtn -> {
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                intent.putExtra(App.SHOULD_REGISTER, false)
+                intent.putExtra(App.USER_ID, mUserId)
+                startActivity(intent)
+                activity?.finish()
             }
         }
     }

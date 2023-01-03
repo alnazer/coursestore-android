@@ -267,6 +267,7 @@ class SignInFrag : UserAuthFrag() {
 //            context?.let { AppKotlin.saveTokenAndEmaileOrMobile(it, customer) }
             val token = response.data!!.token
             App.saveToLocal(token, requireContext(), AppDb.DataType.TOKEN)
+            Log.d("token", token.toString())
             ApiService.createAuthorizedApiService(requireContext(), token)
 
             val commonPresenter = CommonApiPresenterImpl.getInstance()

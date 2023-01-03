@@ -1,5 +1,6 @@
 package com.online.coursestore.presenterImpl
 
+import android.util.Log
 import com.online.coursestore.manager.Utils
 import com.online.coursestore.manager.net.ApiService
 import com.online.coursestore.manager.net.OnDownloadProgressListener
@@ -11,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.lang.Exception
+import java.util.Arrays
 
 class ProgressiveLoadingDialogPresenterImpl(private val dialog: ProgressiveLoadingDialog) :
     Presenter.ProgressiveLoadingPresenter {
@@ -33,6 +35,7 @@ class ProgressiveLoadingDialogPresenterImpl(private val dialog: ProgressiveLoadi
         dialog.addNetworkRequest(download)
         download.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.d("failedDownload", t.message.toString())
             }
 
             override fun onResponse(
@@ -51,8 +54,8 @@ class ProgressiveLoadingDialogPresenterImpl(private val dialog: ProgressiveLoadi
                                 } else {
                                     Utils.extractFileNameFromUrl(fileUrl)
                                 }
-
                                 val byteStream = response.body()!!.byteStream()
+
                                 val filePath = Utils.saveFile(
                                     dialog.requireContext(),
                                     fileDir ?: "",
@@ -73,7 +76,7 @@ class ProgressiveLoadingDialogPresenterImpl(private val dialog: ProgressiveLoadi
 
                                 dialog.onFileSaved(filePath)
                             } catch (ex: Exception) {
-                                dialog.onFileSaveFailed()
+                                dialog.onFileSaveFailed(ex)
                             }
                         }.start()
                     }

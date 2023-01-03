@@ -41,7 +41,8 @@ class CommentRvAdapter(
         }
 
         viewholder.binding.itemCommentTv.text = comment.comment
-        viewholder.binding.itemCommentDateTv.text = Utils.getDateFromTimestamp(comment.createdAt)
+//        viewholder.binding.itemCommentDateTv.text = Utils.getDateFromTimestamp(comment.createdAt)
+        viewholder.binding.itemCommentDateTv.text = comment.createdAt
 
         val author = comment.user
         viewholder.binding.itemCommentUserNameTv.text = author?.name

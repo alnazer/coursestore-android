@@ -51,7 +51,11 @@ class CourseDetailsReviewsFrag : Fragment(), EmptyState {
     private fun init() {
         initBottomPadding()
         val course = requireArguments().getParcelable<Course>(App.COURSE)!!
-
+        if (requireArguments().containsKey("viewPager")){
+            if (requireArguments().getBoolean("viewPager")){
+                mBinding.root.rotationY = 180f
+            }
+        }
         initEmptyState()
 
         if (course.reviews.isEmpty()) {
@@ -65,14 +69,14 @@ class CourseDetailsReviewsFrag : Fragment(), EmptyState {
         mBinding.courseDetailsReviewsCountTv.text =
             ("${course.reviewsCount} ${getString(R.string.reviews)}")
 
-        mBinding.courseDetailsReviewsContentQualityProgressBar.progress =
-            course.rateType!!.contentQuality.toInt()
-        mBinding.courseDetailsReviewsInstructorSkillsProgressBar.progress =
-            course.rateType!!.instructorSkills.toInt()
-        mBinding.courseDetailsReviewsPurchaseWorthProgressBar.progress =
-            course.rateType!!.purchaseWorth.toInt()
-        mBinding.courseDetailsReviewsSupportQualityProgressBar.progress =
-            course.rateType!!.supportQuality.toInt()
+//        mBinding.courseDetailsReviewsContentQualityProgressBar.progress =
+//            course.rateType!!.contentQuality.toInt()
+//        mBinding.courseDetailsReviewsInstructorSkillsProgressBar.progress =
+//            course.rateType!!.instructorSkills.toInt()
+//        mBinding.courseDetailsReviewsPurchaseWorthProgressBar.progress =
+//            course.rateType!!.purchaseWorth.toInt()
+//        mBinding.courseDetailsReviewsSupportQualityProgressBar.progress =
+//            course.rateType!!.supportQuality.toInt()
 
         mBinding.courseDetailsReviewsRv.adapter = ReviewRvAdapter(course.reviews)
     }

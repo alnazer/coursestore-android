@@ -10,7 +10,7 @@ class Comment() : Parcelable {
     var id = 0
 
     @SerializedName("create_at")
-    var createdAt: Long = 0
+    var createdAt: String? = null
 
     @SerializedName("user")
     var user: User? = null
@@ -47,7 +47,7 @@ class Comment() : Parcelable {
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readInt()
-        createdAt = parcel.readLong()
+        createdAt = parcel.readString()
         user = parcel.readParcelable(User::class.java.classLoader)
         comment = parcel.readString()
         replies = parcel.createTypedArrayList(CREATOR)
@@ -62,7 +62,7 @@ class Comment() : Parcelable {
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
-        parcel.writeLong(createdAt)
+        parcel.writeString(createdAt)
         parcel.writeParcelable(user, flags)
         parcel.writeString(comment)
         parcel.writeTypedList(replies)

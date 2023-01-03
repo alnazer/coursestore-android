@@ -32,12 +32,12 @@ class FinancialFrag : Fragment() {
     }
 
     private fun init() {
-        mBinding.tabContainer.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                android.R.color.transparent
-            )
-        )
+//        mBinding.tabContainer.setBackgroundColor(
+//            ContextCompat.getColor(
+//                requireContext(),
+//                android.R.color.transparent
+//            )
+//        )
 
         val tabLayout = mBinding.tabLayout
         val viewPager = mBinding.viewPager
@@ -50,7 +50,7 @@ class FinancialFrag : Fragment() {
 
         val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.add(FinancialSummaryFrag(), getString(R.string.summary))
-        adapter.add(FinancialOfflinePaymentsFrag(), getString(R.string.offline_payments))
+//        adapter.add(FinancialOfflinePaymentsFrag(), getString(R.string.offline_payments))
 
         if (App.loggedInUser!!.isInstructor() || App.loggedInUser!!.isOrganizaton()) {
             adapter.add(FinancialSalesFrag(), getString(R.string.sales))

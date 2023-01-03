@@ -22,6 +22,18 @@ class Course() : ItemPicker, Parcelable {
     @SerializedName("id")
     var id = 0
 
+    @SerializedName("videos_count")
+    var videos_count = 0
+
+    @SerializedName("has_bought")
+    var has_bought = false
+
+    @SerializedName("price_kd")
+    var price_kd = 0.0
+
+    @SerializedName("price_usd")
+    var price_usd = 0.0
+
     @SerializedName("teacher_id")
     var teacherId = 0
 
@@ -174,6 +186,8 @@ class Course() : ItemPicker, Parcelable {
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readInt()
+        videos_count = parcel.readInt()
+        has_bought = parcel.readBoolean()
         teacherId = parcel.readInt()
         creatorId = parcel.readInt()
         categoryId = parcel.readInt()
@@ -223,6 +237,8 @@ class Course() : ItemPicker, Parcelable {
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
+        parcel.writeInt(videos_count)
+        parcel.writeBoolean(has_bought)
         parcel.writeInt(teacherId)
         parcel.writeInt(creatorId)
         parcel.writeInt(categoryId)

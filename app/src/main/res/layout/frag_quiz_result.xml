@@ -469,6 +469,7 @@
             android:textSize="@dimen/textsize_13d"
             app:backgroundTint="@color/white"
             app:cornerRadius="@dimen/btn_corner_radius"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/quizResultBackReviewBtn"
             app:layout_constraintStart_toStartOf="parent"

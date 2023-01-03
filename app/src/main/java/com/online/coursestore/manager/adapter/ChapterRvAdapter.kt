@@ -86,7 +86,11 @@ class ChapterRvAdapter(
                             return
                         }
                         if (item.isVideo){
-                            chapterClickListener.onClick(item)
+                            if (course.hasUserBought){
+                                chapterClickListener.onClick(item)
+                            }else{
+                                showBuyAlert()
+                            }
                             return
                         }
                         else{

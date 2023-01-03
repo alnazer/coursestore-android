@@ -99,7 +99,7 @@ class ProfileFrag : NetworkObserverFragment(), TabLayout.OnTabSelectedListener,
 
         mBinding.profileStudentsTv.text = userProfile.studentsCount.toString()
         mBinding.profileFollowersTv.text = userProfile.followers.size.toString()
-//        mBinding.profileClassesTv.text = userProfile.coursesCount.toString()
+        mBinding.profileClassesTv.text = userProfile.coursesCount.toString()
 
         if (userProfile.verified.toBoolean()) {
             mBinding.profileUserVerifiedImg.visibility = View.VISIBLE

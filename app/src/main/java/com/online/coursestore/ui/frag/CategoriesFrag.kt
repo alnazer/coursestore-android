@@ -47,7 +47,7 @@ class CategoriesFrag : NetworkObserverFragment(), OnItemClickListener {
         (activity as MainActivity).setContainer(false)
 
         mPresneter = CategoriesPresenterImpl(this)
-        mPresneter.getTrendingCategories()
+//        mPresneter.getTrendingCategories()
         mPresneter.getCategories()
     }
 

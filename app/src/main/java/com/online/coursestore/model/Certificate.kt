@@ -10,7 +10,7 @@ class Certificate() : Parcelable {
     var id = 0
 
     @SerializedName("file")
-    lateinit var img: String
+    var img: String? = null
 
     @SerializedName("user_grade")
     var userGrade = 0.0

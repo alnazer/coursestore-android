@@ -259,7 +259,13 @@ class Presenter {
     interface CartPresenter {
         fun getCart()
         fun removeFromCart(cartItemId: Int, position: Int)
-        fun checkout(coupon: Coupon?)
+//        fun checkout(coupon: Coupon?)
+        fun checkout(checkout: Checkout)
+    }
+
+    interface PaymentPresenter {
+        fun checkout(checkout: Checkout)
+        fun verifyPayment(verifyPayment: VerifyPayment)
     }
 
     interface CouponPresenter {

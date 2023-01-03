@@ -316,6 +316,7 @@ object Utils {
             }
 
             val absoluteFileName = filesDir.path + File.separator + fileName
+            Log.d("download", absoluteFileName)
 
             val file = File(absoluteFileName)
             if (file.exists())

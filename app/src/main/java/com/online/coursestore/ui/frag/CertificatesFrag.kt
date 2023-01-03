@@ -1,6 +1,7 @@
 package com.online.coursestore.ui.frag
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +59,9 @@ class CertificatesFrag : NetworkObserverFragment(), OnItemClickListener, EmptySt
 
     fun onCertsReceived(data: List<QuizResult>) {
         if (data.isNotEmpty()) {
+            for (certificate in data){
+                Log.d("certificateID", certificate.id.toString())
+            }
             setAdapter(CertificateRvAdapter(data))
         } else {
             showEmptyState()

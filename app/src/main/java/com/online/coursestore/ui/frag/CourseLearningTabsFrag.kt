@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import com.online.coursestore.R
 import com.online.coursestore.databinding.TabBinding
 import com.online.coursestore.manager.App
+import com.online.coursestore.manager.ToastMaker
 import com.online.coursestore.manager.adapter.ViewPagerAdapter
-import com.online.coursestore.model.Course
-import com.online.coursestore.model.Quiz
-import com.online.coursestore.model.QuizResult
-import com.online.coursestore.model.ToolbarOptions
+import com.online.coursestore.model.*
 import com.online.coursestore.ui.MainActivity
 import com.online.coursestore.ui.SplashScreenActivity
 
 class CourseLearningTabsFrag : Fragment() {
 
     private lateinit var mBinding: TabBinding
+    private lateinit var course:Course
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,16 +35,22 @@ class CourseLearningTabsFrag : Fragment() {
     }
 
     private fun init() {
-        val course = requireArguments().getParcelable<Course>(App.COURSE)!!
+        course = requireArguments().getParcelable<Course>(App.COURSE)!!
         val offlineMode = requireArguments().getBoolean(App.OFFLINE)
+
+        if (requireArguments().containsKey("viewPager")){
+            if (requireArguments().getBoolean("viewPager")){
+                mBinding.root.rotationY = 180f
+            }
+        }
 
         if (offlineMode) {
             (activity as SplashScreenActivity).showToolbar(course.title)
         } else {
-            val toolbarOptions = ToolbarOptions()
-            toolbarOptions.startIcon = ToolbarOptions.Icon.BACK
-
-            (activity as MainActivity).showToolbar(toolbarOptions, course.title)
+//            val toolbarOptions = ToolbarOptions()
+//            toolbarOptions.startIcon = ToolbarOptions.Icon.BACK
+//
+//            (activity as MainActivity).showToolbar(toolbarOptions, course.title)
         }
 
         val tabLayout = mBinding.tabLayout
@@ -64,7 +70,7 @@ class CourseLearningTabsFrag : Fragment() {
 
         val contentFrag = CourseLearningContentFrag()
         contentFrag.arguments = bundle
-        adapter.add(contentFrag, getString(R.string.content))
+        adapter.add(contentFrag, getString(R.string.lessons))
 
         if (course.quizzes.isNotEmpty()) {
             val quizzesFrag = CourseLearningQuizzesFrag()
@@ -93,5 +99,30 @@ class CourseLearningTabsFrag : Fragment() {
 
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
+
+    }
+
+    fun handleLoadVideo(chapterFileItem: ChapterFileItem){
+        if (course.hasUserBought){
+            var gson = Gson()
+            var videoCipherdata: VideoCipherData = gson.fromJson(gson.toJsonTree(chapterFileItem.videoCipherData).asJsonObject, VideoCipherData::class.java)
+            (parentFragment as CourseDetailsFrag).loadVideoCipherVideo(
+                (parentFragment as CourseDetailsFrag).obtainNewVdoParams(videoCipherdata.otp!!,
+                    videoCipherdata.playbackInfo!!)
+            )
+            (parentFragment as CourseDetailsFrag).showHideBtnPromo(true)
+        }
+        else{
+            showBuyAlert()
+        }
+    }
+
+    private fun showBuyAlert() {
+        ToastMaker.show(
+            requireContext(),
+            requireContext().getString(R.string.error),
+            requireContext().getString(R.string.you_have_to_buy_this_course),
+            ToastMaker.Type.ERROR
+        )
     }
 }

@@ -23,6 +23,15 @@
         android:paddingStart="@dimen/margin_16"
         android:paddingEnd="@dimen/margin_16">
 
+        <ImageView
+            android:id="@+id/image_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/homeHeaderNavBtn"
             android:layout_width="@dimen/btn_height"
@@ -432,6 +441,7 @@
                 android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_4"
                 android:layout_marginEnd="@dimen/margin_16"
+                android:visibility="gone"
                 android:background="@drawable/round_view_white_corner20"
                 android:padding="@dimen/padding_16"
                 app:layout_constraintEnd_toEndOf="parent"

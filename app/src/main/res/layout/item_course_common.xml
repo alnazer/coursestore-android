@@ -18,7 +18,7 @@
         android:focusable="false"
         android:foreground="@drawable/ripple_effect_corner_15"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +52,7 @@
                 android:textSize="@dimen/textsize_13d"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/item_course_common_desc_tv"
+                app:layout_constraintBottom_toBottomOf="@id/item_course_common_img"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/item_course_common_img"
                 app:layout_constraintTop_toTopOf="@id/item_course_common_img"

@@ -1,10 +1,12 @@
 package com.online.coursestore.ui.frag
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Outline
 import android.graphics.Paint
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -25,6 +27,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import com.online.coursestore.R
 import com.online.coursestore.databinding.FragCourseDetailsBinding
@@ -36,6 +39,7 @@ import com.online.coursestore.manager.listener.ItemCallback
 import com.online.coursestore.manager.net.observer.NetworkObserverFragment
 import com.online.coursestore.manager.player.PlayerHelper
 import com.online.coursestore.manager.player.FileVideoPlayerHelper
+import com.online.coursestore.manager.player.VdoPlayerControlView
 import com.online.coursestore.model.*
 import com.online.coursestore.presenter.Presenter
 import com.online.coursestore.presenterImpl.CommonApiPresenterImpl
@@ -43,6 +47,8 @@ import com.online.coursestore.presenterImpl.CourseDetailsPresenterImpl
 import com.online.coursestore.ui.MainActivity
 import com.online.coursestore.ui.VideoPlayerActivity
 import com.online.coursestore.ui.widget.*
+import com.paypal.checkout.order.Amount
+import com.paypal.pyplcheckout.sca.runOnUiThread
 import com.robinhood.ticker.TickerUtils
 import com.vdocipher.aegis.media.ErrorDescription
 import com.vdocipher.aegis.media.Track
@@ -73,8 +79,15 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
     private var mActivityFullScreenStarted = false
     private var mShowHours = false
     private var mShowDays = false
-    private lateinit var playerFragment: VdoPlayerUIFragment
+    private lateinit var playerFragment: VdoPlayerSupportFragment
     private lateinit var videoCipherPlayer :VdoPlayer
+    private lateinit var paymentDialog: PaymentOptionsDialog
+    private var currentOrientation = Configuration.ORIENTATION_PORTRAIT
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
+    }
 
     private val mOnCommentAdded = object : ItemCallback<Comment> {
         override fun onItem(item: Comment, vararg args: Any) {
@@ -115,6 +128,8 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
             mBinding.courseDetailsTitleTv.visibility = View.GONE
             mBinding.courseDetailsCategoryTv.visibility = View.GONE
             mBinding.courseDetailsInTv.visibility = View.GONE
+            mBinding.courseDetailsProgressBar.visibility = View.GONE
+            mBinding.courseDetailsProgressTv.visibility = View.GONE
             mBinding.courseDetailsCollapsingLayout.setPadding(0,0,0,0)
             mBinding.courseDetailsCollapsingLayout.requestLayout()
             var params = mBinding.courseDetailsCoordinatorLayout.layoutParams as ConstraintLayout.LayoutParams
@@ -129,6 +144,8 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
             mBinding.courseDetailsRatingBar.visibility = View.VISIBLE
             mBinding.courseDetailsTitleTv.visibility = View.VISIBLE
             mBinding.courseDetailsCategoryTv.visibility = View.VISIBLE
+            mBinding.courseDetailsProgressBar.visibility = View.VISIBLE
+            mBinding.courseDetailsProgressTv.visibility = View.VISIBLE
             mBinding.courseDetailsInTv.visibility = View.VISIBLE
             val padding = Utils.changeDpToPx(requireContext(),16f).toInt()
             mBinding.courseDetailsCollapsingLayout.setPadding(padding,0,padding,padding)
@@ -246,6 +263,18 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         mLoadingDialog = LoadingDialog.instance
         mLoadingDialog.show(childFragmentManager, null)
 
+        if (mCourse.hasUserBought){
+            mBinding.courseDetailsProgressTv.text =
+                ("${mCourse.progress!!.toInt()}% ${getText(R.string.completed)}")
+
+            mBinding.courseDetailsProgressBar.progress = mCourse.progress!!.toInt()
+            mBinding.courseDetailsProgressBar.visibility = View.VISIBLE
+            mBinding.courseDetailsProgressTv.visibility = View.VISIBLE
+        }else {
+            mBinding.courseDetailsProgressTv.visibility = View.GONE
+            mBinding.courseDetailsProgressBar.visibility = View.GONE
+        }
+
         mBinding.courseDetailsTitleTv.text = mCourse.title
         mBinding.courseDetailsInTv.text = getString(R.string._in_captical)
         mBinding.courseDetailsCategoryTv.text = mCourse.category
@@ -260,8 +289,9 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         mCommonPresenter = CommonApiPresenterImpl.getInstance()
         mCommonPresenter.getCourseDetails(mCourse.id, this)
 
-        playerFragment = childFragmentManager.findFragmentById(R.id.vdoCipherfragment) as VdoPlayerUIFragment
+        playerFragment = childFragmentManager.findFragmentById(R.id.vdoCipherfragment) as VdoPlayerSupportFragment
         playerFragment.initialize(this)
+
     }
 
     private fun initBottomSheet() {
@@ -285,10 +315,61 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
     override fun onInitializationSuccess(p0: PlayerHost?, p1: VdoPlayer?, p2: Boolean) {
         Log.d("VideoCipherInit", "Success")
         videoCipherPlayer = p1!!
+        mBinding.videoCipherControlView.setPlayer(videoCipherPlayer)
+        mBinding.videoCipherControlView.setFullscreenActionListener(fullscreenToggleListener)
+//        mBinding.videoCipherControlView.setControllerVisibilityListener(visibilityListener)
+
         if (mCourse.video != null){
             mBinding.courseDetailsImg.visibility = View.GONE
-            adjustLayoutToImg(R.id.vdoCipherfragment)
+            adjustLayoutToImg(R.id.videoCipherContainer)
             playerFragment.view!!.visibility = View.VISIBLE
+            mBinding.videoCipherContainer.visibility = View.VISIBLE
+        }
+    }
+
+
+    private val visibilityListener = object : VdoPlayerControlView.ControllerVisibilityListener {
+        override fun onControllerVisibilityChange(visibility: Int) {
+            Log.i(TAG, "controller visibility $visibility")
+            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                if (visibility != View.VISIBLE) {
+                    showSystemUi(false)
+                }
+            }
+        }
+    }
+
+    private fun showSystemUi(show: Boolean) {
+        Log.v(TAG, (if (show) "show" else "hide") + " system ui")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            if (!show) {
+                requireActivity().window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN)
+            } else {
+                requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            }
+        }
+    }
+
+    private val fullscreenToggleListener = object : VdoPlayerControlView.FullscreenActionListener {
+        override fun onFullscreenAction(enterFullscreen: Boolean): Boolean {
+            showFullScreen(enterFullscreen)
+            return true
+        }
+    }
+
+    private fun showFullScreen(show: Boolean) {
+        Log.v(TAG, (if (show) "enter" else "exit") + " fullscreen")
+
+        requireActivity().requestedOrientation = if (show) {
+            // go to landscape orientation for fullscreen mode
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+        } else {
+            // go to portrait orientation
+            ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
         }
     }
 
@@ -302,6 +383,7 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         mBinding.courseDetailsImg.visibility = View.VISIBLE
         adjustLayoutToImg(R.id.course_details_img)
         playerFragment.view!!.visibility = View.GONE
+        mBinding.videoCipherContainer.visibility = View.GONE
     }
 
     private val videoCipherPlaybackListener = object : VdoPlayer.PlaybackEventListener {
@@ -510,7 +592,7 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
                     learningPage.arguments = bundle
                     (activity as MainActivity).transact(learningPage)
 
-                } else if (btnText == getText(R.string.enroll_on_class)) {
+                } else if (btnText == getText(R.string.add_to_cart)) {
                     if ((mCourse.price == 0.0 &&
                                 (mCourse.pricingPlans.isEmpty() || allPricingPlansAreDisabled())) ||
                         ((mCourse.pricingPlans.isEmpty() || allPricingPlansAreDisabled()) &&
@@ -534,6 +616,15 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
                         dialog.show(childFragmentManager, null)
                     }
                 }
+            }
+
+            R.id.course_details_buy_btn -> {
+                val mAmounts = Amounts()
+                mAmounts.total = mCourse.price
+                mAmounts.total_usd = mCourse.price_usd
+                mAmounts.total_kd = mCourse.price_kd
+                paymentDialog = PaymentOptionsDialog(mAmounts, mCourse.id, null)
+                paymentDialog.show(childFragmentManager, null)
             }
 
             R.id.player_play_pause_btn -> {
@@ -616,7 +707,7 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
                 mBinding.courseDetailsPriceValueTv.visibility = View.GONE
             }
 
-            showContainer()
+//            showContainer()
 
         } else {
 
@@ -627,7 +718,8 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
             }
 
             initPrice()
-            mBinding.courseDetailsEnrollBtn.text = getText(R.string.enroll_on_class)
+            mBinding.courseDetailsEnrollBtn.text = getText(R.string.add_to_cart)
+            mBinding.courseDetailsBuyBtn.visibility = View.VISIBLE
             showContainer()
 
             if (mCourse.isLive() && mCourse.liveCourseStatus != Course.WebinarStatus.NOT_CONDUCTED.value) {
@@ -652,18 +744,22 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
 
         val bundle = Bundle()
         bundle.putParcelable(App.COURSE, mCourse)
+        bundle.putBoolean("viewPager", true)
 
-        val contentFrag = CourseDetailsContentFrag()
+//        val contentFrag = CourseDetailsContentFrag()
+        val content2Frag = CourseLearningTabsFrag()
         val informationFrag = CourseDetailsInformationFrag()
         val reviewsFrag = CourseDetailsReviewsFrag()
         val commentsFrag = CourseDetailsCommentsFrag()
         informationFrag.arguments = bundle
-        contentFrag.arguments = bundle
+//        contentFrag.arguments = bundle
+        content2Frag.arguments = bundle
         reviewsFrag.arguments = bundle
         commentsFrag.arguments = bundle
 
         val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter.add(contentFrag, getString(R.string.content))
+//        adapter.add(contentFrag, getString(R.string.content))
+        adapter.add(content2Frag, getString(R.string.content))
         adapter.add(informationFrag, getString(R.string.information))
         adapter.add(reviewsFrag, getString(R.string.reviews))
         adapter.add(commentsFrag, getString(R.string.comments))
@@ -905,14 +1001,24 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
 
         when (tab.text) {
             getString(R.string.information) -> {
-                showInfoBtnsAndDetails()
+//                showInfoBtnsAndDetails()
+                if (mCourse.hasUserBought) {
+                    hideContainer()
+                } else {
+                    showInfoBtnsAndDetails()
+                }
             }
 
             getString(R.string.content) -> {
-                if (mCourse.hasUserBought || !mIsCollapsed) {
+//                if (mCourse.hasUserBought || !mIsCollapsed) {
+//                    hideContainer()
+//                } else {
+//                    showOrHidePurchaseBtn(true)
+//                }
+                if (mCourse.hasUserBought) {
                     hideContainer()
                 } else {
-                    showOrHidePurchaseBtn(true)
+                    showInfoBtnsAndDetails()
                 }
             }
 
@@ -947,6 +1053,7 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
         hideSubscribeBtn()
         if (!mBinding.courseDetailsEnrollBtn.isVisible) {
             mBinding.courseDetailsEnrollBtn.visibility = View.VISIBLE
+            mBinding.courseDetailsBuyBtn.visibility = View.VISIBLE
         }
     }
 
@@ -956,10 +1063,12 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
 
     private fun showCommentBtn() {
         mBinding.courseDetailsEnrollBtn.text = getString(R.string.leave_a_comment)
+        mBinding.courseDetailsBuyBtn.visibility = View.GONE
         mCurrentBtnsState = BtnContainerState.COMMENT
     }
 
     private fun showReviewBtn() {
+        mBinding.courseDetailsBuyBtn.visibility = View.GONE
         if (mCourse.hasUserBought) {
             var showBtn = true
             for (review in mCourse.reviews) {
@@ -1005,6 +1114,7 @@ class CourseDetailsFrag : NetworkObserverFragment(), View.OnClickListener,
             mBinding.courseDetailsMoreBtn.setOnClickListener(this)
             mBinding.courseDetailsSubscribeBtn.setOnClickListener(this)
             mBinding.courseDetailsEnrollBtn.setOnClickListener(this)
+            mBinding.courseDetailsBuyBtn.setOnClickListener(this)
 
             initTeacher()
             initTabs()

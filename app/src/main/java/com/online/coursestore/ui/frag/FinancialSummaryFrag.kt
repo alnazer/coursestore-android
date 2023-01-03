@@ -50,8 +50,13 @@ class FinancialSummaryFrag : NetworkObserverFragment(), View.OnClickListener,
 
         mCommonPresenter = CommonApiPresenterImpl.getInstance()
         mCommonPresenter.getQuickInfo(this)
-
-        mPresenter = FinancialSummaryPresenterImpl(this)
+        val map = HashMap<String, String>()
+        map["offset"] = "0"
+        map["limit"] = "1"
+        mPresenter = FinancialSummaryPresenterImpl(
+            this,
+                mBinding.financialSummaryRv,
+                map)
         mPresenter.getSummary()
 
         mBinding.financialSummaryChargeBtn.setOnClickListener(this)
@@ -64,6 +69,10 @@ class FinancialSummaryFrag : NetworkObserverFragment(), View.OnClickListener,
         } else {
             showEmptyState()
         }
+    }
+
+    fun hideRvProgress(){
+        mBinding.financialSummaryRvProgressBar.visibility = View.INVISIBLE
     }
 
     override fun onClick(v: View?) {

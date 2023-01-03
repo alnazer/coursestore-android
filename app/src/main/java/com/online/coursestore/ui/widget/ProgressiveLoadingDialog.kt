@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.online.coursestore.manager.net.OnDownloadProgressListener
 import com.online.coursestore.manager.net.observer.NetworkObserverDialog
 import com.online.coursestore.presenter.Presenter
 import com.online.coursestore.presenterImpl.ProgressiveLoadingDialogPresenterImpl
+import com.paypal.android.platform.authsdk.authcommon.analytics.LOGIN
 
 
 class ProgressiveLoadingDialog : NetworkObserverDialog(), View.OnClickListener,
@@ -89,7 +91,8 @@ class ProgressiveLoadingDialog : NetworkObserverDialog(), View.OnClickListener,
         }
     }
 
-    fun onFileSaveFailed() {
+    fun onFileSaveFailed(exception: Exception) {
+        Log.d("download", exception.message + "  " + exception.stackTraceToString())
         Handler(Looper.getMainLooper()).post{
             ToastMaker.show(
                 requireContext(),

@@ -2,7 +2,7 @@
     <string name="app_name">كورس ستور</string>
     <string name="brand">كورس ستور</string>
     <string name="google_server_client_id">965420646539-qg4khjsl6j5qrg9h43b8oh58pgrcik9k.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">675016747030347</string>
+    <string name="facebook_app_id">478484620799635</string>
     <string name="fb_login_protocol_scheme">fb675016747030347</string>
     <string name="onboarding_slide1_title">ابدأ التعلم الآن!</string>
     <string name="onboarding_slide1_desc">مهتم بالتعلم من أفضل المدربين؟</string>
@@ -270,7 +270,6 @@
     <string name="reserve_a_meeting_with_user">"حجز استشارة مع هذا المستخدم "</string>
     <string name="pick_a_date">اختر تاريخًا</string>
     <string name="pick_a_time">اختر وقتًا</string>
-    <string name="add_to_cart">أضف للسلة</string>
     <string name="no_meeting_available">لا توجد استشارة متاحة في هذا التاريخ</string>
     <string name="unavaiable">غير متاح</string>
     <string name="tickets">تذاكر</string>
@@ -347,6 +346,7 @@
     <string name="tax">ضريبة</string>
     <string name="checkout">الدفع</string>
     <string name="add_coupon">أضف كوبون</string>
+    <string name="coupon_added">تم إضافة الكوبون</string>
     <string name="user_group_discount">خصم مجموعة المستخدم</string>
     <string name="you_are_part_of">" أنت جزء من"</string>
     <string name="user_group">مجموعة المستخدم</string>
@@ -355,6 +355,8 @@
     <string name="new_message">رسالة جديدة</string>
     <string name="subscribe">اشترك</string>
     <string name="enroll_on_class">انضم للكورس</string>
+    <string name="buy_now">اشتر الأن</string>
+    <string name="add_to_cart">أضف للعربة</string>
     <string name="price">السعر</string>
     <string name="go_to_learning_page">اذهب لصفحة التدرب</string>
     <string name="class_options">خيارات الكورس</string>
@@ -449,7 +451,7 @@
     <string name="add">أضف</string>
     <string name="promo_video">الفيديو الترويجي</string>
     <string name="add_to_user_course">هل أنت متأكد أنك تريد إضافة هذا الكورس؟</string>
-    <string name="lessons">مقاطع</string>
+    <string name="lessons">المقاطع</string>
     <string name="saving_file_into_your_downloads">حفظ الملف في التنزيلات الخاصة بك ...</string>
     <string name="cancel_download">إلغاء التنزيل</string>
     <string name="cancel_download_desc">هل أنت متأكد أنك تريد إلغاء هذا التنزيل؟</string>
@@ -538,6 +540,7 @@
     <string name="live_class">كورس مباشر</string>
     <string name="text_lessson">كورس نصي</string>
     <string name="approved">موافق عليه</string>
+    <string name="suggested_courses">كورسات مقترحة</string>
     <string name="financial_approval">الموافقة المالية</string>
     <string name="financial_approval_not_desc">لم تتم الموافقة على المعلومات المالية الخاصة بك!</string>
     <string name="your_comment_will_be_published_after_review">سيتم نشر تعليقك بعد المراجعة.</string>

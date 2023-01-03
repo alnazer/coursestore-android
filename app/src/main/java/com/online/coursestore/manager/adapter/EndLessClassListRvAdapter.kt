@@ -68,19 +68,34 @@ class EndLessClassListRvAdapter(items: List<Course?>, private val activity: Main
                     Utils.formatPrice(context, course.price)
             }
 
-            if (course.progress != null) {
-                if (course.progress!! > 50) {
-                    viewholder.binding.itemClassInListProgressBar.progressTintList =
-                        ContextCompat.getColorStateList(context, R.color.accent)
-                }
+            if (course.has_bought || course.hasUserBought){
+                viewholder.binding.itemClassInListProgressBar.visibility = View.VISIBLE
+                if (course.progress != null) {
+                    if (course.progress!! > 50) {
+                        viewholder.binding.itemClassInListProgressBar.progressTintList =
+                            ContextCompat.getColorStateList(context, R.color.accent)
+                    }
 
-                viewholder.binding.itemClassInListProgressBar.visibility = View.VISIBLE
-                viewholder.binding.itemClassInListProgressBar.progress = course.progress!!.toInt()
-            } else if (course.isLive()) {
-                viewholder.binding.itemClassInListProgressBar.visibility = View.VISIBLE
-            } else {
+                    viewholder.binding.itemClassInListProgressBar.visibility = View.VISIBLE
+                    viewholder.binding.itemClassInListProgressBar.progress = course.progress!!.toInt()
+                }
+            }else{
                 viewholder.binding.itemClassInListProgressBar.visibility = View.GONE
             }
+
+//            if (course.progress != null) {
+//                if (course.progress!! > 50) {
+//                    viewholder.binding.itemClassInListProgressBar.progressTintList =
+//                        ContextCompat.getColorStateList(context, R.color.accent)
+//                }
+//
+//                viewholder.binding.itemClassInListProgressBar.visibility = View.VISIBLE
+//                viewholder.binding.itemClassInListProgressBar.progress = course.progress!!.toInt()
+//            } else if (course.isLive()) {
+//                viewholder.binding.itemClassInListProgressBar.visibility = View.VISIBLE
+//            } else {
+//                viewholder.binding.itemClassInListProgressBar.visibility = View.GONE
+//            }
 
             if (course.isLive() && course.startDate > System.currentTimeMillis() / 1000) {
                 viewholder.showAddToCalendar()

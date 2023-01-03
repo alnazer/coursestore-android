@@ -6,8 +6,8 @@ import com.online.coursestore.R
 object BuildVars {
     @JvmField
     var LOGS_ENABLED = true
-   const val API_KEY = "coursestore123456"
-    const val BASE_URL = "https://coursestore.com/api/development/"
+    const val API_KEY = "coursestore123456"
+    const val BASE_URL = "https://demo.coursestore.com/api/development/"
     const val CERT_DOWNLOAD_URL = "${BASE_URL}panel/quizzes/results/{}/download"
     const val PAYMENT_GATEWAY_URL = "${BASE_URL}panel/payments/request"
 

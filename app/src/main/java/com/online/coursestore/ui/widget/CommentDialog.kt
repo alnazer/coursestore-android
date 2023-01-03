@@ -186,7 +186,7 @@ class CommentDialog : NetworkObserverBottomSheetDialog(), View.OnClickListener {
                 )
             }
 
-            comment.createdAt = System.currentTimeMillis() / 1000
+//            comment.createdAt = System.currentTimeMillis() / 1000
             mCallback?.onItem(comment)
             dismiss()
         } else {

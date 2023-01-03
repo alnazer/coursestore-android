@@ -54,28 +54,54 @@ class CartPresenterImpl(private val frag: CartFrag) : Presenter.CartPresenter {
             })
     }
 
-    override fun checkout(coupon: Coupon?) {
-        val cp = coupon ?: Coupon()
-        val checkoutReq = ApiService.apiClient!!.checkout(cp)
+    override fun checkout(checkout: Checkout) {
+        val checkoutReq = ApiService.apiClient!!.checkout(checkout)
         frag.addNetworkRequest(checkoutReq)
-        checkoutReq.enqueue(object : CustomCallback<Data<com.online.coursestore.model.Response>> {
+        checkoutReq.enqueue(object : CustomCallback<Data<CheckoutResponse>> {
             override fun onStateChanged(): RetryListener? {
                 return RetryListener {
-                    checkout(coupon)
+                    checkout(checkout)
                 }
             }
 
-            override fun onResponse(call: Call<Data<com.online.coursestore.model.Response>>, response: Response<Data<com.online.coursestore.model.Response>>) {
-                if (response.body() != null) {
-                    frag.onCheckout(response.body()!!)
-                }
+            override fun onResponse(
+                call: Call<Data<CheckoutResponse>>,
+                response: Response<Data<CheckoutResponse>>
+            ) {
+                frag.onCheckout(response.body()!!)
             }
 
-            override fun onFailure(call: Call<Data<com.online.coursestore.model.Response>>, t: Throwable) {
+            override fun onFailure(call: Call<Data<CheckoutResponse>>, t: Throwable) {
                 super.onFailure(call, t)
                 frag.onRequestFailed()
             }
-
         })
     }
+
+//    override fun checkout(coupon: Coupon?) {
+//        val cp = coupon ?: Coupon()
+//        val checkoutReq = ApiService.apiClient!!.checkout(cp)
+//        frag.addNetworkRequest(checkoutReq)
+//        checkoutReq.enqueue(object : CustomCallback<Data<com.online.coursestore.model.Response>> {
+//            override fun onStateChanged(): RetryListener? {
+//                return RetryListener {
+//                    checkout(coupon)
+//                }
+//            }
+//
+//            override fun onResponse(call: Call<Data<com.online.coursestore.model.Response>>, response: Response<Data<com.online.coursestore.model.Response>>) {
+//                if (response.body() != null) {
+//                    frag.onCheckout(response.body()!!)
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Data<com.online.coursestore.model.Response>>, t: Throwable) {
+//                super.onFailure(call, t)
+//                frag.onRequestFailed()
+//            }
+//
+//        })
+//    }
+
+
 }

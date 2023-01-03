@@ -144,8 +144,8 @@ class SearchFrag : NetworkObserverFragment(), View.OnClickListener{
         val courses = data.data!!.courses.items
         val coursesCount = data.data!!.courses.count
 
-        val users = data.data!!.users.items
-        val usersCount = data.data!!.users.count
+//        val users = data.data!!.users.items
+//        val usersCount = data.data!!.users.count
 
         val organizations = data.data!!.organizations.items
         val organizationsCount = data.data!!.organizations.count
@@ -168,10 +168,10 @@ class SearchFrag : NetworkObserverFragment(), View.OnClickListener{
             classesTitle += " (${coursesCount})"
         }
 
-        var usersTitle = getString(R.string.users)
-        if (usersCount > 0) {
-            usersTitle += " (${usersCount})"
-        }
+//        var usersTitle = getString(R.string.users)
+//        if (usersCount > 0) {
+//            usersTitle += " (${usersCount})"
+//        }
 
         var organizationsTitle = getString(R.string.organizations)
         if (organizationsCount > 0) {
@@ -188,26 +188,32 @@ class SearchFrag : NetworkObserverFragment(), View.OnClickListener{
 //        val usersFrag = UsersOrganizationsFrag()
 //        val organizationsFrag = UsersOrganizationsFrag()
         var bundle = Bundle()
+        bundle.putBoolean("viewPager", true)
 //          bundle.putParcelableArrayList(App.COURSES, courses as ArrayList<Course>)
         Log.d("SizeSearch", courses.size.toString())
         bundle.putParcelable(App.EMPTY_STATE, emptyStateData)
         classesFrag.arguments = bundle
 
-        bundle = Bundle()
-        bundle.putParcelableArrayList(App.USERS, users as ArrayList<User>)
-        bundle.putParcelable(App.EMPTY_STATE, emptyStateData)
-        usersFrag.arguments = bundle
+//        bundle = Bundle()
+//        bundle.putBoolean("viewPager", true)
+//        bundle.putParcelableArrayList(App.USERS, users as ArrayList<User>)
+//        bundle.putParcelable(App.EMPTY_STATE, emptyStateData)
+//        usersFrag.arguments = bundle
 
         bundle = Bundle()
+        bundle.putBoolean("viewPager", true)
         bundle.putParcelableArrayList(App.USERS, organizations as ArrayList<User>)
         bundle.putParcelable(App.EMPTY_STATE, emptyStateData)
         organizationsFrag.arguments = bundle
+
+
         val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.add(classesFrag, classesTitle)
-        adapter.add(usersFrag, usersTitle)
+//        adapter.add(usersFrag, usersTitle)
         adapter.add(organizationsFrag, organizationsTitle)
         tabLayout.setupWithViewPager(viewPager)
         viewPager.adapter = adapter
+        viewPager.rotationY = 180f
         classesFrag.updateCourses(courses as ArrayList<Course>)
         mLoadingDialog.dismiss()
 

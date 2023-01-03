@@ -43,12 +43,12 @@ class MeetingsTabFrag : NetworkObserverFragment() {
         mLoadingDialog = LoadingDialog.instance
         mLoadingDialog.show(childFragmentManager, null)
 
-        mBinding.tabContainer.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                android.R.color.transparent
-            )
-        )
+//        mBinding.tabContainer.setBackgroundColor(
+//            ContextCompat.getColor(
+//                requireContext(),
+//                android.R.color.transparent
+//            )
+//        )
 
         val toolbarOptions = ToolbarOptions()
         toolbarOptions.startIcon = ToolbarOptions.Icon.NAV

@@ -68,6 +68,7 @@
                     android:fontFamily="@font/regular"
                     android:minWidth="130dp"
                     android:text="@string/charge"
+                    android:visibility="gone"
                     android:textAllCaps="false"
                     android:textColor="@color/accent"
                     android:textSize="@dimen/textsize_15d"

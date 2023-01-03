@@ -1,5 +1,6 @@
 package com.online.coursestore.ui.frag
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,17 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.google.gson.Gson
-import com.myfatoorah.sdk.entity.executepayment.MFExecutePaymentRequest
-import com.myfatoorah.sdk.entity.initiatepayment.MFInitiatePaymentRequest
-import com.myfatoorah.sdk.entity.initiatepayment.MFInitiatePaymentResponse
-import com.myfatoorah.sdk.entity.paymentstatus.MFGetPaymentStatusResponse
-import com.myfatoorah.sdk.utils.MFAPILanguage
-import com.myfatoorah.sdk.utils.MFCountry
-import com.myfatoorah.sdk.utils.MFCurrencyISO
-import com.myfatoorah.sdk.utils.MFEnvironment
-import com.myfatoorah.sdk.views.MFResult
-import com.myfatoorah.sdk.views.MFSDK
 import com.online.coursestore.R
 import com.online.coursestore.databinding.EmptyStateBinding
 import com.online.coursestore.databinding.FragCartBinding
@@ -28,11 +18,9 @@ import com.online.coursestore.manager.adapter.CartRvAdapter
 import com.online.coursestore.manager.listener.ItemCallback
 import com.online.coursestore.manager.net.observer.NetworkObserverFragment
 import com.online.coursestore.model.*
-import com.online.coursestore.model.view.PaymentRedirection
 import com.online.coursestore.presenter.Presenter
 import com.online.coursestore.presenterImpl.CartPresenterImpl
 import com.online.coursestore.ui.MainActivity
-import com.online.coursestore.ui.PaymentStatusActivity
 import com.online.coursestore.ui.frag.abstract.EmptyState
 import com.online.coursestore.ui.widget.CouponDialog
 import com.online.coursestore.ui.widget.LoadingDialog
@@ -46,8 +34,9 @@ class CartFrag : NetworkObserverFragment(), View.OnClickListener, ItemCallback<C
     private lateinit var mPresenter: Presenter.CartPresenter
     private lateinit var mLoadingDialog: LoadingDialog
     private lateinit var mAmounts: Amounts
-    private var mCouponValidation: CouponValidation? = null
+    var mCouponValidation: CouponValidation? = null
     private lateinit var cartItems: List<CartItem>
+    private lateinit var paymentDialog: PaymentOptionsDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -156,7 +145,7 @@ class CartFrag : NetworkObserverFragment(), View.OnClickListener, ItemCallback<C
             val adapter = mBinding.cartItemsRv.adapter as CartRvAdapter
             adapter.items.removeAt(position)
             adapter.notifyItemRemoved(position)
-
+            refresh()
             if (adapter.itemCount == 0) {
                 onCartReceived(null)
             }
@@ -178,18 +167,55 @@ class CartFrag : NetworkObserverFragment(), View.OnClickListener, ItemCallback<C
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.cart_add_coupon_btn -> {
-                val dialog = CouponDialog()
+                val dialog = CouponDialog(null)
                 dialog.setOnCouponAdded(this)
                 dialog.show(childFragmentManager, null)
             }
 
             R.id.cart_checkout_btn -> {
-//                mLoadingDialog = LoadingDialog.instance
-//                mLoadingDialog.show(childFragmentManager, null)
-//                mPresenter.checkout(mCouponValidation?.coupon)
-                val dialog = PaymentOptionsDialog(mBinding.cartTotalValueTv.text as String, cartItems)
-                dialog.show(childFragmentManager, null)
+                if (mCouponValidation != null){
+                    if (mCouponValidation!!.amounts.total == 0.0){
+                        val checkout = Checkout()
+                        checkout.return_type = "order"
+                        checkout.PaymentMethodId = ""
+                        checkout.gateway_id = ""
+                        checkout.webinar_id = ""
+                        checkout.discount_id = mCouponValidation!!.coupon.discountId.toString()
+                        checkoutOrder(checkout)
+                    }
+                    else{
+                        paymentDialog = PaymentOptionsDialog(mAmounts, null, mCouponValidation)
+                        paymentDialog.show(childFragmentManager, null)
+                    }
+                }else{
+                    paymentDialog = PaymentOptionsDialog(mAmounts, null, mCouponValidation)
+                    paymentDialog.show(childFragmentManager, null)
+                }
             }
+        }
+    }
+
+
+    fun checkoutOrder(checkout: Checkout){
+        mLoadingDialog = LoadingDialog.instance
+        mLoadingDialog.show(childFragmentManager, null)
+        mPresenter.checkout(checkout)
+    }
+
+    fun onCheckout(data: Data<CheckoutResponse>) {
+        mLoadingDialog.dismiss()
+        if (data.isSuccessful) {
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            intent.putExtra(App.PAYMENT_SUCCESS, true)
+            requireActivity().finish()
+            startActivity(intent)
+        } else {
+            ToastMaker.show(
+                requireContext(),
+                getString(R.string.error),
+                data.message,
+                ToastMaker.Type.ERROR
+            )
         }
     }
 
@@ -204,43 +230,6 @@ class CartFrag : NetworkObserverFragment(), View.OnClickListener, ItemCallback<C
         mCouponValidation = item
 
         initInfo(item.amounts)
-    }
-
-    fun onCheckout(data: Data<Response>) {
-        mLoadingDialog.dismiss()
-
-        if (data.isSuccessful && !data.data!!.link.isNullOrEmpty()) {
-//            val bundle = Bundle()
-//            bundle.putParcelable(App.ORDER, data.data!!)
-//
-//            if (mAmounts.total == 0.0) {
-//                startActivity(Intent(requireContext(), MainActivity::class.java))
-//                activity?.finish()
-//
-//            } else {
-            val redirection = PaymentRedirection()
-            redirection.isNavDrawer = true
-            redirection.position = MainActivity.SlideMenuItem.DASHBOARD.value()
-            redirection.buttonTitle = getString(R.string.dashboard)
-            PaymentStatusActivity.paymentRedirection = redirection
-//
-//                bundle.putParcelable(App.REDIRECTION, redirection)
-//
-//                val frag = ChargeAccountPaymentFrag()
-//                frag.arguments = bundle
-//                (activity as MainActivity).transact(frag)
-//            }
-
-            Utils.openLink(requireContext(), data.data!!.link)
-
-        } else {
-            ToastMaker.show(
-                requireContext(),
-                getString(R.string.error),
-                data.message,
-                ToastMaker.Type.ERROR
-            )
-        }
     }
 
     fun showEmptyState() {

@@ -9,7 +9,7 @@
     <dimen name="margin_32">32dp</dimen>
     <dimen name="margin_24">24dp</dimen>
     <dimen name="padding_horizontal_btn">10dp</dimen>
-    <dimen name="btn_corner_radius">20dp</dimen>
+    <dimen name="btn_corner_radius">8dp</dimen>
     <dimen name="edtx_height_size">58dp</dimen>
     <dimen name="icon_default_size">30dp</dimen>
     <dimen name="icon_size">25dp</dimen>
@@ -29,8 +29,8 @@
     <dimen name="bottom_sheet_handle_top_margin">8dp</dimen>
     <dimen name="zero">0dp</dimen>
     <dimen name="img_header_size">250dp</dimen>
-    <dimen name="card_corner_radius">13dp</dimen>
-    <dimen name="card_corner_radius_15">13dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_corner_radius_15">8dp</dimen>
     <dimen name="btn_height2">55dp</dimen>
 
     <dimen name="textsize_9d">9dp</dimen>
@@ -49,6 +49,9 @@
     <dimen name="textsize_13d">13dp</dimen>
     <dimen name="textsize_16d">16dp</dimen>
 
+
+    <dimen name="vdo_media_button_width">54dp</dimen>
+    <dimen name="vdo_media_button_height">40dp</dimen>
     <!--    <dimen name="textsize_10d">10dp</dimen>-->
 <!--    <dimen name="textsize_12d">12dp</dimen>-->
 <!--    <dimen name="textsize_14d">14dp</dimen>-->

@@ -1,12 +1,23 @@
 package com.online.coursestore.manager.adapter
 
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.online.coursestore.R
 import com.online.coursestore.databinding.ItemCategoryBinding
 import com.online.coursestore.manager.App
@@ -19,6 +30,8 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder
+import retrofit2.http.Url
+import java.net.URL
 
 
 class CategoriesRvAdapter(
@@ -75,6 +88,7 @@ class CategoriesRvAdapter(
                 }
                 binding.itemCategoryArrowImg.startAnimation(rotation)
             }
+
 
             binding.itemCategoryImgBottomDash.visibility = View.VISIBLE
             binding.itemCategoryDivider.visibility = View.INVISIBLE
@@ -186,13 +200,23 @@ class CategoriesRvAdapter(
 //        } else {
 //            holder.binding.itemCategoryArrowImg.setImageResource(R.drawable.ic_arrow_right_gull_gray)
 //        }
-
         holder.binding.itemCategoryTitleTv.text = categoryView.catTitle
         holder.binding.itemCategoryDescTv.text =
             ("${categoryView.count} ${context.getString(R.string.courses)}")
 
-        if (categoryView.icon != null)
-            Glide.with(context).load(categoryView.icon).into(holder.binding.itemCategoryImg)
+        if (categoryView.icon != null) {
+            Glide.with(context)
+                .asBitmap()
+                .load(categoryView.icon)
+                .into(object : CustomTarget<Bitmap>(){
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        holder.binding.itemCategoryImg.setImageBitmap(resource)
+                        holder.binding.itemCategoryImg.setBackgroundColor(Color.TRANSPARENT)
+                    }
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+        }
     }
 
     private fun showCategoryPage(category: Category) {

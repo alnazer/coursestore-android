@@ -2,7 +2,7 @@
     <string name="app_name">Rocket LMS</string>
     <string name="brand">Rocket LMS</string>
     <string name="google_server_client_id">965420646539-qg4khjsl6j5qrg9h43b8oh58pgrcik9k.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">675016747030347</string>
+    <string name="facebook_app_id">478484620799635</string>
     <string name="fb_login_protocol_scheme">fb675016747030347</string>
     <string name="onboarding_slide1_title">Start learning now!</string>
     <string name="onboarding_slide1_desc">Interested in to learn from the best teachers around the world?</string>
@@ -14,7 +14,9 @@
     <string name="sign_in_up_page_desc">Start learning from the best instructors in different topics.</string>
     <string name="sign_up">Inscribirse</string>
     <string name="login">Acceso</string>
+    <string name="buy_now">Buy Now</string>
     <string name="skip_login">Skip login</string>
+    <string name="suggested_courses">Suggested Courses</string>
     <string name="welcome_back">¡Bienvenido de nuevo!✌✌️</string>
     <string name="forget_password_emoji">Contraseña olvidada✌️</string>
     <string name="promo_video">Promo Video</string>
@@ -348,6 +350,7 @@
     <string name="tax">Tax</string>
     <string name="checkout">Checkout</string>
     <string name="add_coupon">Add Coupon</string>
+    <string name="coupon_added">Coupon Added Successfully</string>
     <string name="user_group_discount">User group discount</string>
     <string name="you_are_part_of">"You are part of "</string>
     <string name="user_group">user group</string>

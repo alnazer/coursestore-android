@@ -1,6 +1,7 @@
 package com.online.coursestore.ui.frag
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +51,9 @@ class ClassesFrag : NetworkObserverFragment(), EmptyState {
     fun updateCourses(c: ArrayList<Course>){
         classes = c
         if (this:: mBinding.isInitialized){
+            if (c.size == 0){
+                mBinding.rv.visibility = View.INVISIBLE
+            }
             init()
         }
     }
@@ -57,6 +61,11 @@ class ClassesFrag : NetworkObserverFragment(), EmptyState {
     private fun init() {
         if (requireArguments().getParcelableArrayList<Course>(App.COURSES) != null){
             classes = requireArguments().getParcelableArrayList<Course>(App.COURSES) as ArrayList<Course>
+        }
+        if (requireArguments().containsKey("viewPager")){
+            if (requireArguments().getBoolean("viewPager")){
+                mBinding.root.rotationY = 180f
+            }
         }
         //var classes = requireArguments().getParcelableArrayList<Course>(App.COURSES)
         val useGrid = requireArguments().getBoolean(App.USE_GRID)
@@ -103,6 +112,8 @@ class ClassesFrag : NetworkObserverFragment(), EmptyState {
                 } else {
                     val adapter = ClassListGridRvAdapter(classes, activity as MainActivity)
                     mBinding.rv.adapter = adapter
+                    mBinding.rv.visibility = View.VISIBLE
+                    hideEmptyState()
                 }
             }
         }else{

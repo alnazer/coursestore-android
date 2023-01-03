@@ -49,6 +49,23 @@ class HomeClassRvAdapter(items: List<Course>, private val activity: MainActivity
         }
         viewholder.binding.itemCourseTitleTv.text = course.title
 
+        if (course.hasUserBought || course.has_bought){
+            viewholder.binding.itemCourseImgProgressBar.visibility = View.VISIBLE
+            if (course.progress != null) {
+                if (course.progress!! > 50) {
+                    viewholder.binding.itemCourseImgProgressBar.progressTintList =
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(context, R.color.accent)
+                        )
+                }
+
+                viewholder.binding.itemCourseImgProgressBar.visibility = View.VISIBLE
+                viewholder.binding.itemCourseImgProgressBar.progress = course.progress!!.toInt()
+            }
+        }else{
+            viewholder.binding.itemCourseImgProgressBar.visibility = View.GONE
+        }
+
         if (position == 0 || position == itemCount - 1) {
             val itemFeaturedContainer = viewholder.binding.itemCourseContainer
             val layoutParams = itemFeaturedContainer.layoutParams as RecyclerView.LayoutParams
@@ -183,21 +200,23 @@ class HomeClassRvAdapter(items: List<Course>, private val activity: MainActivity
 
         }
 
-        if (course.progress != null) {
-            if (course.progress!! > 50) {
-                viewholder.binding.itemCourseImgProgressBar.progressTintList =
-                    ColorStateList.valueOf(
-                        ContextCompat.getColor(context, R.color.accent)
-                    )
-            }
-
-            viewholder.binding.itemCourseImgProgressBar.visibility = View.VISIBLE
-            viewholder.binding.itemCourseImgProgressBar.progress = course.progress!!.toInt()
-        } else if (course.isLive()) {
-            viewholder.binding.itemCourseImgProgressBar.visibility = View.VISIBLE
-        } else {
-            viewholder.binding.itemCourseImgProgressBar.visibility = View.GONE
-        }
+//        if (course.progress != null) {
+//            if (course.progress!! > 50) {
+//                viewholder.binding.itemCourseImgProgressBar.progressTintList =
+//                    ColorStateList.valueOf(
+//                        ContextCompat.getColor(context, R.color.accent)
+//                    )
+//            }
+//
+//            viewholder.binding.itemCourseImgProgressBar.visibility = View.VISIBLE
+//            viewholder.binding.itemCourseImgProgressBar.progress = course.progress!!.toInt()
+//        }
+//        else if (course.isLive()) {
+//            viewholder.binding.itemCourseImgProgressBar.visibility = View.VISIBLE
+//        }
+//        else {
+//            viewholder.binding.itemCourseImgProgressBar.visibility = View.GONE
+//        }
 
         if (course.isLive() && course.startDate > System.currentTimeMillis() / 1000) {
             viewholder.showAddToCalendar()

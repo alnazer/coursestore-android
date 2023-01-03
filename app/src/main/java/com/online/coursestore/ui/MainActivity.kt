@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
@@ -20,6 +21,7 @@ import com.online.coursestore.R
 import com.online.coursestore.databinding.ActivityMainBinding
 import com.online.coursestore.manager.*
 import com.online.coursestore.manager.adapter.SlideMenuRvAdapter
+import com.online.coursestore.manager.db.AppDb
 import com.online.coursestore.manager.listener.ItemCallback
 import com.online.coursestore.manager.listener.ItemClickListener
 import com.online.coursestore.manager.listener.OnItemClickListener
@@ -55,6 +57,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
     private var mBottomShape: ViewShape? = null
     private var mCurrentFrag: Fragment? = null
     private var mDrawerSlideListener: DrawerSlideListener? = null
+    var user: UserProfile? = null
 
     interface OnRefreshListener {
         fun refresh()
@@ -76,14 +79,14 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
         init()
     }
 
     private fun init() {
         App.currentActivity = this
         mPresenter = LogoutPresenterImpl()
-
+        ApiService.createAuthorizedApiService(this, AppDb(this).getData(AppDb.DataType.TOKEN).toString())
+        Log.d("tokenMainActivity", AppDb(this).getData(AppDb.DataType.TOKEN).toString())
         setApiServiceActivity()
         initNavDrawer()
         initContracts()
@@ -94,6 +97,12 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
         initClickListeners()
         initNeedToRegister()
         mCurrentBackStackCount = supportFragmentManager.backStackEntryCount
+
+        if (intent.getBooleanExtra(App.PAYMENT_SUCCESS, false)){
+            ToastMaker.show(this, getString(R.string.successful_payment), getString(R.string.successful_payment_desc))
+            mBinding.bottomNav.selectedItemId = R.id.my_classes_page
+            transact(MyClassesTabFrag(), false, false)
+        }
     }
 
 
@@ -111,6 +120,10 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
         transact(HomeFrag(), false, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+//        refreshHomeForLogin()
+    }
 
     private fun initContracts() {
         mRequestToLoginContract =
@@ -276,7 +289,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
     }
 
     fun initUserInfo() {
-        val user = App.loggedInUser
+        user = App.loggedInUser
 
         mBinding.slideCountryImg.setImageResource(
             BuildVars.LNG_FLAG[BaseActivity.language!!.name.uppercase(
@@ -287,10 +300,10 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
         if (user != null) {
             mBinding.slideLogInOutBtn.text = getString(R.string.logout)
 
-            if (!user.avatar.isNullOrEmpty())
-                Glide.with(this).load(user.avatar).into(mBinding.slideUserImg)
+            if (!user?.avatar.isNullOrEmpty())
+                Glide.with(this).load(user?.avatar).into(mBinding.slideUserImg)
 
-            mBinding.slideUserNameTv.text = user.name
+            mBinding.slideUserNameTv.text = user?.name
         } else {
             mBinding.slideLogInOutBtn.text = getString(R.string.login)
             mBinding.slideUserNameTv.text = getString(R.string.app_name)
@@ -613,12 +626,15 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
             when (position) {
 
                 SlideMenuItem.HOME.value() -> {
-                    if (!mBinding.mainHomeTv.isVisible) {
-                        if (mBinding.bottomNav.isVisible) {
-                            super.onBackPressed()
-                        } else {
-                            transact(HomeFrag(), false)
-                        }
+//                    if (!mBinding.mainHomeTv.isVisible) {
+//                        if (mBinding.bottomNav.isVisible) {
+//                            super.onBackPressed()
+//                        } else {
+//                            transact(HomeFrag(), false)
+//                        }
+//                    }
+                    if (supportFragmentManager.findFragmentById(R.id.mainContainer) !is HomeFrag){
+                        transact(HomeFrag(), false)
                     }
                 }
 
@@ -681,6 +697,14 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
 
     fun refreshCurrentFrag() {
         mRefreshListener?.refresh()
+    }
+
+    fun refreshHomeForLogin(){
+        val frag = supportFragmentManager.findFragmentById(R.id.mainContainer)
+        if (frag is HomeFrag){
+            supportFragmentManager.beginTransaction().detach(frag).commitNow()
+            supportFragmentManager.beginTransaction().attach(frag).commitNow()
+        }
     }
 
     fun transact(
@@ -824,8 +848,8 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnItemClickListener,
         FAVORITES(6),
         COMMENTS(7),
         FINANCIAL(8),
-        SUBSCRIPTION(9),
-        SUPPORT(10);
+        SUBSCRIPTION(10),
+        SUPPORT(9);
 
         fun value(): Int {
             return type

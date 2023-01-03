@@ -1,5 +1,9 @@
 package com.online.coursestore.manager.adapter
 
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +13,8 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.online.coursestore.R
 import com.online.coursestore.databinding.ItemCommonBinding
 import com.online.coursestore.manager.Utils
@@ -73,6 +79,18 @@ class TrendingCategoriesRvAdapter(items: List<CommonItem>, private val windowMan
 //        } else if (item.imgResource() != null) {
 //            viewHolder.binding.itemCommonImg.setImageResource(item.imgResource()!!)
 //        }
+//        Log.d("iconTrendingCategory", item.img().toString())
+//        Glide.with(context)
+//            .asBitmap()
+//            .load(item.img())
+//            .into(object : CustomTarget<Bitmap>(){
+//                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+//                    viewHolder.binding.itemCommonImg.setImageBitmap(resource)
+//                    viewHolder.binding.itemCommonImg.setBackgroundColor(Color.TRANSPARENT)
+//                }
+//                override fun onLoadCleared(placeholder: Drawable?) {
+//                }
+//            })
         viewHolder.binding.itemCommonImg.setImageResource(R.drawable.round_view_accent_corner20)
 
         val imgPadding = item.imgPadding(context)

@@ -2,7 +2,7 @@
     <string name="app_name">CourseStore</string>
     <string name="brand">CourseStore</string>
     <string name="google_server_client_id">965420646539-qg4khjsl6j5qrg9h43b8oh58pgrcik9k.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">675016747030347</string>
+    <string name="facebook_app_id">478484620799635</string>
     <string name="fb_login_protocol_scheme">fb675016747030347</string>
     <string name="onboarding_slide1_title">Start learning now!</string>
     <string name="onboarding_slide1_desc">Interested in to learn from the best teachers around the world?</string>
@@ -19,6 +19,7 @@
     <string name="forget_password_emoji">Forget Password✌️</string>
     <string name="sign_in_desc">Login to your account and enjoy learning…</string>
     <string name="email_or_phone">Email</string>
+    <string name="suggested_courses">Suggested Courses</string>
     <string name="password">Password</string>
     <string name="terms_and_services">By using our services,  you agree to our Terms &amp; Policies</string>
     <string name="donnot_have_account">Don\'t have an account?</string>
@@ -98,6 +99,8 @@
     <string name="get_started">Get started</string>
     <string name="skip">Skip</string>
     <string name="successful_payment">Successful Payment</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="add_to_cart">Add to Cart</string>
     <string name="successful_payment_desc">The payment was successful.</string>
     <string name="failed_payment">Payment Failed</string>
     <string name="failed_payment_desc">The payment was not successful.</string>
@@ -270,7 +273,6 @@
     <string name="reserve_a_meeting_with_user">"Reserve a live meeting with this user "</string>
     <string name="pick_a_date">Pick a date</string>
     <string name="pick_a_time">Pick a time</string>
-    <string name="add_to_cart">Add to cart</string>
     <string name="no_meeting_available">No meeting is available on this date</string>
     <string name="unavaiable">Unavailable</string>
     <string name="tickets">Tickets</string>
@@ -347,6 +349,7 @@
     <string name="tax">Tax</string>
     <string name="checkout">Checkout</string>
     <string name="add_coupon">Add Coupon</string>
+    <string name="coupon_added">Coupon Added Successfully</string>
     <string name="user_group_discount">User group discount</string>
     <string name="you_are_part_of">"You are part of "</string>
     <string name="user_group">user group</string>

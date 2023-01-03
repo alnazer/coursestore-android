@@ -18,11 +18,15 @@ class PaymentChannel() : Parcelable {
     @SerializedName("image")
     var image: String? = null
 
+    @SerializedName("PaymentMethodId")
+    var paymentMethodID: String? = null
+
     constructor(parcel: Parcel) : this() {
         id = parcel.readInt()
         title = parcel.readString()!!
         className = parcel.readString()
         image = parcel.readString()
+        paymentMethodID = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -30,6 +34,7 @@ class PaymentChannel() : Parcelable {
         parcel.writeString(title)
         parcel.writeString(className)
         parcel.writeString(image)
+        parcel.writeString(paymentMethodID)
     }
 
     override fun describeContents(): Int {

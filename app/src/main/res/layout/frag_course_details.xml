@@ -375,17 +375,37 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:roundedCorners="all" />
 
-                        <fragment
-                            android:name="com.vdocipher.aegis.ui.view.VdoPlayerUIFragment"
-                            android:id="@+id/vdoCipherfragment"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/videoCipherContainer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            android:keepScreenOn="true"/>
+                            app:cardPreventCornerOverlap="false"
+                            app:cardCornerRadius="@dimen/card_corner_radius">
+
+                            <fragment
+                                android:name="com.vdocipher.aegis.player.VdoPlayerSupportFragment"
+                                android:id="@+id/vdoCipherfragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:keepScreenOn="true"/>
+
+                            <com.online.coursestore.manager.player.VdoPlayerControlView
+                                android:id="@+id/videoCipherControlView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layoutDirection="ltr"
+                                android:keepScreenOn="true"/>
+
+                        </com.google.android.material.card.MaterialCardView>
+
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/course_details_instructor_container"
@@ -409,6 +429,7 @@
                                 app:civ_border_width="0dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/course_details_instructor_name_tv"
@@ -443,6 +464,35 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/course_details_progress_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_8"
+                            android:layout_marginBottom="@dimen/margin_8"
+                            android:fontFamily="@font/regular"
+                            android:includeFontPadding="false"
+                            android:textColor="@color/text_color3"
+                            android:textSize="@dimen/textsize_13d"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/course_details_instructor_container"
+                            tools:ignore="SpUsage" />
+
+                        <ProgressBar
+                            android:id="@+id/course_details_progress_bar"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="12dp"
+                            android:layout_marginTop="@dimen/margin_4"
+                            android:layout_marginBottom="@dimen/margin_8"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:progressDrawable="@drawable/progress_drawable_accent"
+                            android:progressTint="@color/accent"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/course_details_progress_tv" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/course_details_more_btn"
@@ -522,6 +572,7 @@
                 android:id="@+id/courseDetailsViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:rotationY="180"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -614,15 +665,34 @@
             android:layout_marginEnd="@dimen/margin_8"
             android:layout_marginBottom="@dimen/margin_16"
             android:fontFamily="@font/regular"
-            android:text="@string/enroll_on_class"
+            android:text="@string/add_to_cart"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_13d"
             app:backgroundTint="@color/accent"
             app:cornerRadius="@dimen/btn_corner_radius"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/course_details_subscribe_btn"
+            app:layout_constraintEnd_toStartOf="@+id/course_details_buy_btn"
             app:layout_constraintStart_toStartOf="parent"
+            app:rippleColor="@color/rippleColor"
+            tools:ignore="SpUsage" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/course_details_buy_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:fontFamily="@font/regular"
+            android:text="@string/buy_now"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_13d"
+            app:backgroundTint="@color/accent"
+            app:cornerRadius="@dimen/btn_corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/course_details_enroll_btn"
+            app:layout_constraintEnd_toEndOf="parent"
             app:rippleColor="@color/rippleColor"
             tools:ignore="SpUsage" />
 

@@ -1,6 +1,7 @@
 package com.online.coursestore.manager.adapter
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.online.coursestore.R
 import com.online.coursestore.databinding.ItemCourseCommon2Binding
 import com.online.coursestore.manager.App
 import com.online.coursestore.manager.Utils
+import com.online.coursestore.manager.listener.ChapterClickListener
 import com.online.coursestore.model.ChapterFileItem
 import com.online.coursestore.model.ChapterSessionItem
 import com.online.coursestore.model.ChapterTextItem
@@ -30,10 +32,12 @@ class ChaptersContentAdapter(
     groups: List<ExpandableGroup<*>>?,
     private val course: Course,
     private val activity: Activity,
-    private val mOfflineMode: Boolean
+    private val mOfflineMode: Boolean,
+    val chapterClickListener: ChapterClickListener
 ) : ExpandableRecyclerViewAdapter<ChaptersContentAdapter.ChapterViewHolder, ChaptersContentAdapter.ChapterItemViewHolder>(
     groups
 ) {
+    var selectedPosition = -1
 
     class ChapterViewHolder(val binding: ItemCourseCommon2Binding) :
         GroupViewHolder(binding.root) {
@@ -111,9 +115,8 @@ class ChaptersContentAdapter(
     ) {
         val context = holder.itemView.context
         val item = (group as ChapterView).items[childIndex]
-
         holder.binding.itemCourseCommon2TitleTv.text = item.title(context)
-        holder.binding.itemCourseCommon2DescTv.text = item.desc(context)
+//        holder.binding.itemCourseCommon2DescTv.text = item.desc(context)
         holder.binding.itemCourseCommon2Img.setBackgroundResource(item.imgBgResource(context))
         holder.binding.itemCourseCommon2Img.setImageResource(item.imgResource(context))
         if (item.passed()) {
@@ -145,40 +148,52 @@ class ChaptersContentAdapter(
                     ContextCompat.getDrawable(context, R.drawable.ripple_effect)
             }
             holder.binding.itemCourseCommonCard2.setBackgroundResource(R.color.white)
+            if (selectedPosition == flatPosition){
+                holder.binding.itemCourseCommonCard2.setBackgroundColor(activity.getColor(R.color.accent_transparent_10))
+                holder.binding.itemCourseCommon2Img.setImageResource(R.drawable.ic_pause_circle_filled)
+            }else{
+                holder.binding.itemCourseCommonCard2.setBackgroundColor(activity.getColor(R.color.white))
+                holder.binding.itemCourseCommon2Img.setImageResource(R.drawable.ic_play2)
+            }
             params.bottomMargin = 0
         }
         holder.binding.itemCourseCommonCard2.requestLayout()
 
         holder.itemView.setOnClickListener {
-            val listPos = expandableList.getUnflattenedPosition(flatPosition)
-
-            val bundle = Bundle()
-            bundle.putParcelable(App.COURSE, course)
-            //flat position starts with 1 not 0
-            bundle.putInt(App.CHAPTER_POSITION, listPos.groupPos)
-            bundle.putInt(App.CHAPTER_ITEM_POSITION, listPos.childPos)
-            bundle.putBoolean(App.OFFLINE, mOfflineMode)
-
-            when (item) {
-                is ChapterSessionItem -> {
-                    bundle.putParcelable(App.ITEM, item)
-                }
-
-                is ChapterFileItem -> {
-                    bundle.putParcelable(App.ITEM, item)
-                }
-
-                is ChapterTextItem -> {
-                    bundle.putParcelable(App.ITEM, item)
-                }
-            }
-
-            val courseChapterPage = CourseChapterItemFrag()
-            courseChapterPage.arguments = bundle
-            if (activity is MainActivity) {
-                activity.transact(courseChapterPage)
-            } else if (activity is SplashScreenActivity) {
-                activity.transact(courseChapterPage)
+//            val listPos = expandableList.getUnflattenedPosition(flatPosition)
+//
+//            val bundle = Bundle()
+//            bundle.putParcelable(App.COURSE, course)
+//            //flat position starts with 1 not 0
+//            bundle.putInt(App.CHAPTER_POSITION, listPos.groupPos)
+//            bundle.putInt(App.CHAPTER_ITEM_POSITION, listPos.childPos)
+//            bundle.putBoolean(App.OFFLINE, mOfflineMode)
+//
+//            when (item) {
+//                is ChapterSessionItem -> {
+//                    bundle.putParcelable(App.ITEM, item)
+//                }
+//
+//                is ChapterFileItem -> {
+//                    bundle.putParcelable(App.ITEM, item)
+//                }
+//
+//                is ChapterTextItem -> {
+//                    bundle.putParcelable(App.ITEM, item)
+//                }
+//            }
+//
+//            val courseChapterPage = CourseChapterItemFrag()
+//            courseChapterPage.arguments = bundle
+//            if (activity is MainActivity) {
+//                activity.transact(courseChapterPage)
+//            } else if (activity is SplashScreenActivity) {
+//                activity.transact(courseChapterPage)
+//            }
+            if (item is ChapterFileItem){
+                selectedPosition = flatPosition
+                chapterClickListener.onClick(item)
+                notifyDataSetChanged()
             }
         }
     }
